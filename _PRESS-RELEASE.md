@@ -19,26 +19,78 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
+  Crime Visualization Project [Replace Name]
+
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+
+  CVP offers curious citizens an interactive, engaging view into the crime patterns across the United States. 
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
+  CVP is a highly interactive web browser experience that immerses viewers in the vastness of crime data. With crime patterns
+  emerging as a systemic social issue in the United States, social concientious citizens desire new ways to understand 
+  the current state of crime in their city. CVP provides an easily understood visual interface to engage with your local community. 
+  The interface allows the user to traverse time across years, days, types of crime, location, and district demographics. CVP is a 
+  web based experience. 
+
+  Visualization experience:
+  - Points stream in at the beginning of the page load 
+
+  Data Visualization Features:
+
+  - Type in address to search bar. Visualize the crime within X mile radius of the inputed address.
+  - Filter by:
+    - One single 24 hour day
+      - Show holidays and peak crime dates
+      - Show individual points
+    - 10 years, animation incremented by year
+      - Show glowing views/heat maps (average the data) - research the best way to visualize this
+        - Show the demographic shifts across the time, comparing the 
+    - Demographics 
+    - Type of Crime
+  - Click on district to see crime summary for that period of time
+  - Slow down animation, hover over points to see specific crimes
+  - Click on points, districts to bring up local news storys, wikipedia info, etc. 
+
 ## Problem ##
   > Describe the problem your product solves.
+
+  Crime is cities is difficult for a citizen to understand on an aggregate level. Beyond local news' annecdotal stories, social 
+  issues such at crime are notoriously difficult to convey. Further, it is difficult to deliver this information in an
+  engaging medium. Citizens crave this information, but generally lack reputable, accurate sources. The city of San Francisco
+  has a database of millions of lines of crime logs. This data tells a story, but is impossible to understand unless
+  the data is transformed. 
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
 
+  CVP displays data in an easily digestible, customizable format. Users can play with the data, in part internalizing the 
+  information. Users can speed and slow the transition of crime across a day across the city of San Francisco. They
+  zoom into an area of San Francisco to inspect the crime in an area of interest, bringing the story to life for 
+  their specific conditions. Interactive data is especially powerful for crime patterns as citizens can connect
+  with the portions of city they have a specific interest in. And, perhaps, they can understand the conditions 
+  outside of their community. 
+
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+
+  CVP brings millions of crime logs off the page and captures the imagination, interest, and perhaps action of 
+  the citizens of San Francisco. 
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
 
+  Navigate to the SVP website and explore!
+
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
+  "As a San Francisco native of 15 years, I have seen the city evolve before my eyes. As the city continues to 
+  evolve, understanding how the crime throughout the city changes further connects me to my city. "
+
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+  Explore the SVP website and click on the page to bring up links to learn more. 
