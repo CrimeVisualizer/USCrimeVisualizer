@@ -4,9 +4,12 @@
  * Module dependencies.
  */
 
+// This is the file that gets run to start the server
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+// Generate database from db.js
+var db = require('../db');
 
 /**
  * Get port from environment and store in Express.
