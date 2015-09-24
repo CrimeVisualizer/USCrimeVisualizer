@@ -8,12 +8,12 @@ module.exports = function(grunt) {
         stderr: true
       },
       mongoimport: {
-        command: 'mongoimport --db USCrime --collection crimes --type csv --headerline --file ./test.csv'
+        command: 'mongoimport --db USCrime --collection crimes --type csv --headerline --file ./server/test.csv'
       }
     },
     nodemon: {
       dev: {
-        script: './bin/www'
+        script: './server/bin/www'
       }
     },
     mochaTest: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['./test/*.js']
+        src: ['./server/test/*.js']
       }
     }
   });
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
     grunt.task.run(['nodemon']);
   });
   // Runs tests
-  grunt.registerTask('test', function(n) {
+  grunt.registerTask('servertest', function(n) {
     grunt.task.run(['mochaTest']);
   });
 
