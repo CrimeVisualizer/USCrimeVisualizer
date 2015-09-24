@@ -46,5 +46,4 @@ module.exports = function(grunt) {
   grunt.registerTask('servertest', function(n) {
     grunt.task.run(['mochaTest']);
   });
-
 };
