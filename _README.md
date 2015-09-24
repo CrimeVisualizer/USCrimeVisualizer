@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Tim Scheys
+  - __Scrum Master__: Edgar Pabon
+  - __Development Team Members__: Bowen Yang, Tommy Sander
 
 ## Table of Contents
 
@@ -22,13 +22,11 @@
 
 > Some usage instructions
 
+
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+
 
 ## Development
 
@@ -44,7 +42,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap: https://github.com/CrimeVisualizer/USCrimeVisualizer/issues
 
 
 ## Contributing
