@@ -1,0 +1,28 @@
+{
+  "name": "USCrimeVisualizer",
+  "version": "0.0.0",
+  "homepage": "https://github.com/shadedprofit/USCrimeVisualizer",
+  "authors": [
+    "Edgar Pabon",
+    "Bowen Yang",
+    "Tommy Sanders",
+    "Tim Scheys"
+  ],
+  "description": "Crime data visualization",
+  "main": "bower_components",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-mocks": "~1.4.6",
+    "angular-route": "~1.4.6",
+    "d3": "~3.5.6",
+    "Materialize": "materialize#~0.97.1"
+  }
+}

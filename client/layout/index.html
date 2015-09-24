@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="crimevis">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="layout/style.css">
+  <title>Visify: Data Visualization for Cities</title>
+</head>
+<body>
+  <div ng-include src="'layout/header.html'"></div>
+
+  <div ng-view></div>
+
+  <div ng-include src="'layout/footer.html'"></div>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/materialize/bin/materialize.js"></script>
+  <script src="maps/mapController.js"></script>
+  <script src="layout/app.js"></script>
+</body>
+</html>

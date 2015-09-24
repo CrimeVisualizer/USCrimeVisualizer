@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -5,6 +6,7 @@ azure.err
 iisnode.yml
 
 server/node_modules
+client/bower_components
 
 # Icon must ends with two \r.
 Icon

@@ -1,0 +1,22 @@
+body {
+  font-family: "Roboto", arial, sans-serif;
+}
+
+#map {
+  background-color: #eeeeee;
+}
+
+#sidebar {
+  background-color: #fcfcfc;
+}
+
+.headerbar {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navColor {
+  background-color: #1e88e5;
+  margin-bottom: 40px;
+  z-index: 100;
+}
