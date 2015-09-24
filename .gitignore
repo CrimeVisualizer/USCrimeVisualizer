@@ -4,7 +4,7 @@
 azure.err
 iisnode.yml
 
-server/node_modules
+node_modules
 client/bower_components
 
 # Icon must ends with two \r.
