@@ -1,0 +1,16 @@
+body {
+  background: #363A44;
+  color: #FFFFFF;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+svg {
+  margin: 20px;
+}
+
+path:hover {
+  opacity: 0.5;
+}
