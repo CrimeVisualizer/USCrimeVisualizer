@@ -15,11 +15,20 @@ module.exports = function(grunt) {
       dev: {
         script: './bin/www'
       }
+    },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['./test/*.js']
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   ////////////////////////////////////////////////////
   // Main grunt tasks
@@ -33,4 +42,9 @@ module.exports = function(grunt) {
   grunt.registerTask('default', function(n) {
     grunt.task.run(['nodemon']);
   });
+  // Runs tests
+  grunt.registerTask('test', function(n) {
+    grunt.task.run(['mochaTest']);
+  });
+
 };
