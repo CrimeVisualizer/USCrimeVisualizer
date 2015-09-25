@@ -1,13 +1,12 @@
 // Sets the mongo database
-var mongoose = require('mongoose');
-
 var mongoURI = 'mongodb://localhost/USCrime';
-mongoose.connect(mongoURI);
+// Retrieve
+var MongoClient = require('mongodb').MongoClient;
 
-// Run in seperate terminal window using 'mongod'
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
- console.log('Mongodb connection open');
+// Connect to the db
+MongoClient.connect(mongoURI, function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+  }
+  module.exports = db
 });
-module.exports = db;

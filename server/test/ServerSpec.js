@@ -1,9 +1,8 @@
 var request = require('supertest');
 var express = require('express');
 var expect = require('chai').expect;
-var mongoose = require('mongoose');
 var app = require('../app');
-var Crimes = require('../model/crimeSchema');
+
 var db = require('../db');
 
 /////////////////////////////////////////////////////
@@ -11,13 +10,14 @@ var db = require('../db');
 /////////////////////////////////////////////////////
 
 describe("US Crime data visualization", function () {
+  console.log(db)
   // Check if collection crimes exists
   it("Does collection 'crimes' exist", function (done) {
-    Crimes.findOne({}, function(err, result) {
-      expect(result).to.not.equal(null);
-      done();
+    db.collection('crimes').find().toArray(function(err, results) {
+      console.log(results)
+      expect(results).to.not.equal(null);
+      done();    
     });
-
   });
   // Check if document is correctly imported
   it("Should insert 3071 documents in crimes collection", function (done) {

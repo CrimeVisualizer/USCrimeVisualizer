@@ -1,5 +1,5 @@
 {
-  "excludeFiles" : ["client/bower_components/**", "node_modules/**", "./**/*.md", "./**/*.json", "./**/*..gitignore", "./**/*.csv", "./**/*.bowerrc"],    
+  "excludeFiles" : ["client/bower_components/**", "node_modules/**","Gruntfile.js"],    
   "disallowKeywordsOnNewLine": ["else"],
   "disallowKeywords": ["with", "case"],
   "disallowMixedSpacesAndTabs": true,
