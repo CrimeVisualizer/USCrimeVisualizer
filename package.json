@@ -1,7 +1,11 @@
 {
-  "name": "USCrimeVisualizer",
+  "name": "myapp",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "lint": "jscs ./"
+  },
+  "pre-commit": "lint",
   "dependencies": {
     "body-parser": "~1.13.2",
     "chai": "^3.3.0",
@@ -15,11 +19,16 @@
     "jade": "~1.11.0",
     "karma": "^0.13.10",
     "mocha": "^2.3.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.0.43",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "jscs": "^2.1.1",
+    "jshint-stylish": "^2.0.1",
+    "pre-commit": "^1.1.1",
     "supertest": "^1.1.0"
   }
 }

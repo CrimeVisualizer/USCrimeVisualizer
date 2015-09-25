@@ -8,7 +8,8 @@ module.exports = function(grunt) {
         stderr: true
       },
       mongoimport: {
-        command: 'mongoimport --db USCrime --collection crimes --type csv --headerline --file ./test.csv'
+        command: ['mongo USCrime --eval "db.crimes.drop()"',
+        'mongoimport --db USCrime --collection crimes --type csv --headerline --file ./server/test.csv'].join('&&')
       }
     },
     nodemon: {
