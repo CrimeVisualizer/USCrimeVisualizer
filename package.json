@@ -2,6 +2,10 @@
   "name": "myapp",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "lint": "jscs ./"
+  },
+  "pre-commit": "lint",
   "dependencies": {
     "body-parser": "~1.13.2",
     "chai": "^3.3.0",
@@ -19,6 +23,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "jscs": "^2.1.1",
+    "jshint-stylish": "^2.0.1",
+    "pre-commit": "^1.1.1",
     "supertest": "^1.1.0"
   }
 }
