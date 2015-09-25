@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
-        script: './bin/www'
+        script: './server/bin/www'
       }
     },
     mochaTest: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['./test/*.js']
+        src: ['./server/test/*.js']
       }
     }
   });
@@ -43,8 +43,7 @@ module.exports = function(grunt) {
     grunt.task.run(['nodemon']);
   });
   // Runs tests
-  grunt.registerTask('test', function(n) {
+  grunt.registerTask('servertest', function(n) {
     grunt.task.run(['mochaTest']);
   });
-
 };
