@@ -1,4 +1,5 @@
-$(document).ready(function() {
+// $(document).ready(function() {
+// Map of San Francisco
   var data = {
     "features" : [{
       "geometry" : {
@@ -328,7 +329,7 @@ $(document).ready(function() {
 
   var width = 600, height = 600;
 
-  var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
+  var svg = d3.select("#neighborhood").append("svg").attr("width", width).attr("height", height);
 
   var projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
   var path = d3.geo.path().projection(projection);
@@ -371,4 +372,4 @@ $(document).ready(function() {
 
 
 
-});
+// });
