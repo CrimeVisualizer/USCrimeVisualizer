@@ -20,6 +20,8 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "karma-nyan-reporter": "^0.2.2",
+    "karma-unicorn-reporter": "^0.1.4",
     "supertest": "^1.1.0"
   }
 }
