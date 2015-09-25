@@ -16,16 +16,16 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // angular source
-      'client/lib/angular/angular.js',
-      'client/lib/angular-route/angular-route.js',
-      'client/lib/angular-mocks/angular-mocks.js',
+      'client/bower_components/angular/angular.js',
+      'client/bower_components/angular-route/angular-route.js',
+      'client/bower_components/angular-mocks/angular-mocks.js',
 
       // our app code
       'client/**/*.js',
 
       // our spec files
       'node_modules/expect.js/index.js',
-      'specs/client/**/*.js'
+      'test/client/**/*.js'
     ],
 
 
@@ -45,7 +45,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['nyan','unicorn'],
+    reporters: [],
 
 
     // web server port
