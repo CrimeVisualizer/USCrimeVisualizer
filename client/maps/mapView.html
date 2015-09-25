@@ -1,4 +1,4 @@
-<div class="row" id="map">
+<div class="row" id="map" ng-controller="mapController">
   <div class="col s1"></div>
   <div class="form-group col s2" id="sidebar">
     <form name="filterData">
@@ -18,7 +18,14 @@
   </div>
 
 
-  <div class="col s9"></div>
+  <div class="col s9">
+    <h4>A Neighborhood Map of San Francisco</h4>
+    <p id="details">Hover over a neighborhood for details</p>
+    <div id="neighborhood">
+      <d3-events data="d3Events"></d3-events>
+    </div>
+  </div>
+  </div>
 </div>
 
 <div id="explanation">
