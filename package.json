@@ -1,11 +1,15 @@
 {
-  "name": "USCrimeVisualizer",
+  "name": "myapp",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "test": "karma start karma.conf.js",
-    "start": "gulp"
+    "start": "gulp",
+    "lint": "jscs ./"
   },
+
+  "pre-commit": "lint",
+
   "dependencies": {
     "body-parser": "~1.13.2",
     "chai": "^3.3.0",
@@ -18,10 +22,13 @@
     "grunt-shell": "^1.1.2",
     "jade": "~1.11.0",
     "mocha": "^2.3.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.0.43",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
   },
+
   "devDependencies": {
     "browser-sync": "^1.5.7",
     "gulp": "^3.8.5",
@@ -40,6 +47,9 @@
     "karma-nested-reporter": "^0.1.1",
     "karma-nyan-reporter": "0.0.43",
     "karma-phantomjs-launcher": "^0.1.4",
+    "jscs": "^2.1.1",
+    "jshint-stylish": "^2.0.1",
+    "pre-commit": "^1.1.1",
     "supertest": "^1.1.0"
   }
 }

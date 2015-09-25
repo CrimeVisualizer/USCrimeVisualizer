@@ -1,0 +1,23 @@
+{
+  "excludeFiles" : ["client/bower_components/**", "node_modules/**","Gruntfile.js"],    
+  "disallowKeywordsOnNewLine": ["else"],
+  "disallowKeywords": ["with", "case"],
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleSpaces": {"allowEOLComments": true},
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowTrailingComma": true,
+  "disallowTrailingWhitespace": true,
+  "requireBlocksOnNewline": true,
+  "requireCurlyBraces": true,
+  "requireObjectKeysOnNewLine": true,
+  "requireSemicolons": true,
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpaceAfterKeywords": true,
+  "requireSpaceBeforeBinaryOperators": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeObjectValues": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInForStatement": true,
+  "requireSpacesInFunctionDeclaration": {"beforeOpeningCurlyBrace": true},
+  "requireSpacesInFunctionExpression": {"beforeOpeningCurlyBrace": true}
+}
