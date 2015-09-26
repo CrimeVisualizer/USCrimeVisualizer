@@ -357,9 +357,11 @@ angular.module('crimevis.directives', ['crimevis.services'])
           "type" : "FeatureCollection"
         };
           // if no data gets passed in, return
-          if (!data) {
-            return;
-          }
+          // if (!scope.data) {
+          //   return;
+          // }
+
+
 
           var projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
           var path = d3.geo.path().projection(projection);
@@ -381,14 +383,27 @@ angular.module('crimevis.directives', ['crimevis.services'])
           // points
           aa = [-122.490402, 37.786453];
           bb = [-122.389809, 37.72728];
-
+          console.log(scope.data);
+          console.log('location', scope.data.location);
+            var coord;
         // add circles to svg
           svg.selectAll("circle")
-          .data([aa,bb]).enter()
+          .data(scope.data).enter()
           .append("circle")
-          .attr("cx", function (d) { console.log(projection(d)); return projection(d)[0]; })
-          .attr("cy", function (d) { return projection(d)[1]; })
-          .attr("r", "8px")
+          .attr("cx", function (d) { 
+            coord = [d.X, d.Y];
+            // console.log(projection(d)); 
+            // d.Location = JSON.parse(d.Location.replace('(', '[').replace(')',']'));
+            // d.Location.reverse();
+            return projection(coord)[0]; 
+          })
+          .attr("cy", function (d) { 
+            // d.Location = JSON.parse(d.Location.replace('(', '[').replace(')',']'));
+            coord = [d.X, d.Y];
+            console.log("d is :",d);
+            return projection(coord)[1]; 
+          })
+          .attr("r", "2px")
           .attr("fill", "red")
 
 
