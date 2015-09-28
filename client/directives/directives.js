@@ -392,20 +392,31 @@ angular.module('crimevis.directives', ['crimevis.services'])
           .append("circle")
           .attr("cx", function (d) { 
             coord = [d.X, d.Y];
-            // console.log(projection(d)); 
-            // d.Location = JSON.parse(d.Location.replace('(', '[').replace(')',']'));
-            // d.Location.reverse();
             return projection(coord)[0]; 
           })
           .attr("cy", function (d) { 
-            // d.Location = JSON.parse(d.Location.replace('(', '[').replace(')',']'));
             coord = [d.X, d.Y];
-            console.log("d is :",d);
             return projection(coord)[1]; 
           })
-          .attr("r", "2px")
+          .attr("r", "0px")
           .attr("fill", "red")
-
+          .transition(500)
+          .delay(function(d) {
+            var time = d.Time.split(":");
+            console.log('time is: ' + time);
+            return (time[0] * 1000) + ((time[1] / 60) * 1000);
+          })
+          .ease("cubic-in-out")
+          .attr("r", "1px")
+          .attr("fill", "red")
+          .transition()
+          .delay(function(d) {
+            var time = d.Time.split(":");
+            console.log('time is: ' + time);
+            return ((time[0] * 1000) + ((time[1] / 60) * 1000) + 1000);
+          })
+          .ease("cubic-in-out")
+          .attr("r", "0px");
 
           $('svg path').hover(function() {
             $("#details").text($(this).data("id") + " : " + $(this).data("name"));
