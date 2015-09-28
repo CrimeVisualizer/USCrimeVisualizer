@@ -1,6 +1,7 @@
 angular.module('crimevis', [
   'crimevis.services',
-  'crimevis.directives',
+  'crimevis.mapDirectives',
+  'crimevis.eventDirectives',
   'crimevis.maps',
   'ngRoute'
   ])
