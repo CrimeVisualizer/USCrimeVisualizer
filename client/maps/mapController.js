@@ -16,5 +16,5 @@ angular.module('crimevis.maps', [])
       // }
     });
   };
-  $scope.getEvents();
+  // $scope.getEvents();
 })
