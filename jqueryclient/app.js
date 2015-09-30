@@ -1,12 +1,16 @@
+var svg, projection;
+
 var getData = function (callback) {
-  $.get('/api/events', function (data) {
+  $.get('/api/events' , function (data) {
     callback(data);
   });
 };
 
-var renderPoints = function (svg, projection) {
+var renderPoints = function () {
   getData(function (data) {
       var coord;
+      console.log(svg);
+      console.log(projection);
       // add circles to svg
       data = JSON.parse(data);
       svg.selectAll("circle")
@@ -25,11 +29,13 @@ var renderPoints = function (svg, projection) {
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      animatePoints(svg);
+      animatePoints();
   });
 };
 
-var animatePoints = function(svg) {
+var animatePoints = function() {
+  console.log(svg);
+  console.log(projection);
   svg.selectAll("circle")
   .attr("r", "0px")
   .attr("stroke", "red")
@@ -54,10 +60,10 @@ var render = function () {
   var width = .8 * window.innerWidth, height = .85 * window.innerHeight;
 
   // Creates the map svg
-  var svg = d3.select('#city').append("svg").attr("width", width).attr("height", height);
+  svg = d3.select('#city').append("svg").attr("width", width).attr("height", height);
 
   // Map of San Francisco
-  var projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
+  projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
   var path = d3.geo.path().projection(projection);
 
   // gsfmap is a global variable from map/map.js
@@ -75,9 +81,8 @@ var render = function () {
   }).attr('data-name', function(d) {
     return d.properties.name;
   });
-
-  renderPoints(svg, projection);
 };
 
 
 render();
+renderPoints();

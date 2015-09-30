@@ -1,7 +1,6 @@
 body, html {
   font-family: "Roboto", arial, sans-serif;
   overflow-x: hidden; 
-  overflow-y: hidden;
 }
 
 #main {
@@ -12,7 +11,6 @@ body, html {
 #map {
   background-color: #101010;
   padding: 50px;
-  margin-bottom: 150px;
   color: white;
   text-align: center;
 }
@@ -29,36 +27,6 @@ body, html {
 
 #browse {
   margin-left: 130px;
-}
-
-#banner a {
-  background-color: #1565c0;
-}
-
-#bannerBox {
-  position: absolute;
-  border-radius: 3px;
-  height: 180px;
-  width: 300px;
-  margin-top: 80px;
-  margin-left: 50px;
-  padding: 100, 10;
-  color: white;
-  background-color: rgba(0,0,0,0.6);
-
-}
-
-#bannerBox h3 a{
-  color: white;
-  text-align: center;
-}
-
-#bannerFoot {
-  /*position: absolute;*/
-  width: 100%;
-  bottom: 0;
-  background-color: #060404;
-  padding: 0 20px;
 }
 
 #d3Map {
