@@ -1,7 +1,5 @@
 var svg, projection;
 
-
-
 var getData = function (callback) {
   console.log('got in ajax request');
   $.get('/api/events/', function (data) {
@@ -10,85 +8,75 @@ var getData = function (callback) {
 };
 
 // Get Google Reverse Geocode API data - passes latLong for Google API lookup
-// https://developers.google.com/maps/documentation/geocoding/intro?csw=1#ReverseGeocoding
+//https://developers.google.com/maps/documentation/geocoding/intro?csw=1#ReverseGeocoding
 var getZipcode = function (latLong, callback) {
-  console.log('Got the Google Zipcode data');
 
   // Build URL string for query
   var googleURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
                   + latLong
-                  + '&key=AIzaSyDNluL4ihqXG-0jDzo-kGNfEy73pWRH9uI';
+                  + '&key=AIzaSyDOKSY3LtWFhxGqEAcX7pLNfndGjkNVy-I';
 
   $.get(googleURL , function (data) {
-    console.log('inside google url get')
-    console.log(data);
-    console.log(data.results[7]["long_name"]);
-
-    callback(data);
+    var zipcode = data['results'][0]['address_components'][7]['long_name'];
+    callback(zipcode);
   });
 };
 
-getZipcode('37.7702797662699, -122.433521628095', function(data) {
-  console.log(data);
-});
-
-
 
 // Calculates min and max of crime data set for use in quantize
-// var getMaxMin = function (data) {
-//   var resultArray = [];
-//   var dataMax = _.max(data, function(item) {
-//     return item['count'];
-//   });
-//   var dataMin = _.min(data, function(item) {
-//     return item['count'];
-//   });
-//   resultArray.push(dataMin);
-//   resultArray.push(dataMax);
-//   return resultArray;
-// };
+/*var getMaxMin = function (data) {
+  var resultArray = [];
+  var dataMax = _.max(data, function(item) {
+    return item['count'];
+  });
+  var dataMin = _.min(data, function(item) {
+    return item['count'];
+  });
+  resultArray.push(dataMin);
+  resultArray.push(dataMax);
+  return resultArray;
+};
+*/
 
 
 // Generates a range of 9 values within the provided domain.
 // Function used to generated CSS class values, 0-8.
 // Values correspond to a range of blues in CSS file (see CSS file)
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE DOMAIN HARDCODE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*var quantize = d3.scale.quantize()
+var quantize = d3.scale.quantize()
     .domain([162, 622])
     .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
-    */
+    
 
 // Append zipcode to each record
 // Uses Google API
-/*var appendZipcode = function(data) {
-
+  newData = [];
+var appendZipcode = function(data) {
+  data = JSON.parse(data);
   // Iterate over each record in the data
   _.each(data, function(record) {
-
     // Get lat & long from data
-    var latLong = record['Location'];
-    console.log(latLong);
+    var yCoord = record.Y;
+    var xCoord = record.X;
+     var latLong = yCoord + ',' + xCoord;
+     // console.log(latLong);
 
     // Call Google API with record's lat and long
     getZipcode(latLong, function (zipcode) {
-
-      console.log(zipcode);
-      data['zipcode'] = zipcode;
-      console.log(data);
+      record['zipcode'] = zipcode;
+      console.log(record);
+      newData.push(record);
     });
   });
 };
+  console.log(newData);
 
 // Sum each zipcode count by each record
 var getZipcodeCount = function (data) {
-  var zipcodeCount = _.countBy(data, function(record) {
+  return _.countBy(data, function(record) {
     return record['zipcode'];
   });
 };
-*/
-
-
-
 
 var renderPoints = function (params) {
   getData(function (data) {
@@ -141,37 +129,56 @@ var animatePoints = function() {
 };
 
 // // Renders Heat Map - this is rendered in place of standard map
-// var renderHeatMap = function (params) {
+var renderHeatMap = function (params) {
+
+  // Create the D3 map
+  var width = .8 * window.innerWidth, height = .85 * window.innerHeight;
+
+  // Creates the map svg
+  svg = d3.select('#city').append("svg").attr("width", width).attr("height", height);
+
+  // Map of San Francisco
+  projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
+  var path = d3.geo.path().projection(projection);
+
+  // gsfmap is a global variable from map/map.js
+  var bounds = path.bounds(gsfmap);
+
+  xScale = width / Math.abs(bounds[1][0] - bounds[0][0]);
+  yScale = height / Math.abs(bounds[1][1] - bounds[0][1]);
+  scale = xScale < yScale ? xScale : yScale;
+
+  var transl = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
+  projection.scale(scale).translate(transl);
 
 
+  // Renders the Heat Map graphics
+  getData(function(data) {
+    // Get zipcode for each entry and append to dataset
+    appendZipcode(data);
+    // Run summing function on zipcode data
+    // getZipcodeCount()
 
-//   getData(function(data) {
-//     // Get zipcode for each entry and append to dataset
-//     getZipcode()
-//     appendZipcode()
-//     // Run summing function on zipcode data
-//     getZipcodeCount()
+    // Render the heat map
+    svg.selectAll("path")
+      .data(data.features)
+    .enter().append("path")
+      .attr("d", path)
+        .attr('data-id', function(d) {
+          return d.id;
+        }).attr('data-name', function(d) {
+          return d.properties.name;
+        })
+        // .style("fill", "#ffffff").style("stroke", "#111111")   REMOVE ME AFTER TESTING!
+        .attr("class", function(d) {
+          return quantize(districtData[d.properties.name]); // Quantize by total crimes per zipcode
+        });
 
-//     // Render the heat map
-//     svg.selectAll("path")
-//       .data(data.features)
-//     .enter().append("path")
-//       .attr("d", path)
-//         .attr('data-id', function(d) {
-//           return d.id;
-//         }).attr('data-name', function(d) {
-//           return d.properties.name;
-//         })
-//         // .style("fill", "#ffffff").style("stroke", "#111111")   REMOVE ME AFTER TESTING!
-//         .attr("class", function(d) {
-//           return quantize(districtData[d.properties.name]); // Quantize by total crimes per zipcode
-//         });
-
-//   });
-// };
+  });
+};
 
 // Renders standard map
-var render = function () {
+/*var render = function () {
   var width = .8 * window.innerWidth, height = .85 * window.innerHeight;
 
   // Creates the map svg
@@ -196,8 +203,9 @@ var render = function () {
   }).attr('data-name', function(d) {
     return d.properties.name;
   });
-};
+};*/
 
 
-render();
+renderHeatMap();
+// render();
 renderPoints();
