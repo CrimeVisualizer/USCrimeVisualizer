@@ -8,7 +8,7 @@ var makeYears = function() {
 var makeMonths = function() {
   months.forEach(function(value, index) {
     var monthNumber = index + 1;
-    $("#months").append("<button class='month' id=" + monthNumber + 1 + ">"+ value +"</button>");
+    $("#months").append("<button class='month' id=" + monthNumber + ">"+ value +"</button>");
   });
 }
 makeYears();
@@ -16,9 +16,10 @@ makeMonths();
 
 var getMonth = function() {
   console.log('getting data');
-  var year = $('.active.year').val();
-  var month = $('.active.month').val();
+  var year = $('.active.year').attr("id");
+  var month = $('.active.month').attr("id");
   console.log(year, month);
+  renderPoints('date?' + year + '-' + month);
   // $.get('/slider', function (data) {
   //   callback(data);
   // });
@@ -26,12 +27,12 @@ var getMonth = function() {
 }
 
 $(".year").on("click", function(e) {
-  $(this).attr("class", "active");
-  getData();
+  $(this).attr("class", "active year");
+  console.log(this);
 });
 $(".month").on("click", function(e) {
-  $(this).attr("class", "active");
-  getData();
+  $(this).attr("class", "active month");
+  getMonth();
 });
 
 
