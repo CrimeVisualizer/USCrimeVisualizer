@@ -19,7 +19,7 @@ var getMonth = function() {
   var year = $('.active.year').attr("id");
   var month = $('.active.month').attr("id");
   console.log(year, month);
-  renderPoints('date?' + year + '-' + month);
+  renderPoints('date=' + year + '-' + month);
   // $.get('/slider', function (data) {
   //   callback(data);
   // });
