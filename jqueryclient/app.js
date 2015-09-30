@@ -15,32 +15,38 @@ var getZipcode = function (latLong, callback) {
   console.log('Got the Google Zipcode data');
 
   // Build URL string for query
-  var googleURL = '//maps.googleapis.com/maps/api/geocode/json?latlng=' 
+  var googleURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
                   + latLong
                   + '&key=AIzaSyDNluL4ihqXG-0jDzo-kGNfEy73pWRH9uI';
 
   $.get(googleURL , function (data) {
+    console.log('inside google url get')
     console.log(data);
     console.log(data.results[7]["long_name"]);
+
     callback(data);
   });
 };
 
+getZipcode('37.7702797662699, -122.433521628095', function(data) {
+  console.log(data);
+});
+
 
 
 // Calculates min and max of crime data set for use in quantize
-var getMaxMin = function (data) {
-  var resultArray = [];
-  var dataMax = _.max(data, function(item) {
-    return item['count'];
-  });
-  var dataMin = _.min(data, function(item) {
-    return item['count'];
-  });
-  resultArray.push(dataMin);
-  resultArray.push(dataMax);
-  return resultArray;
-};
+// var getMaxMin = function (data) {
+//   var resultArray = [];
+//   var dataMax = _.max(data, function(item) {
+//     return item['count'];
+//   });
+//   var dataMin = _.min(data, function(item) {
+//     return item['count'];
+//   });
+//   resultArray.push(dataMin);
+//   resultArray.push(dataMax);
+//   return resultArray;
+// };
 
 
 // Generates a range of 9 values within the provided domain.
@@ -87,8 +93,8 @@ var getZipcodeCount = function (data) {
 var renderPoints = function (params) {
   getData(function (data) {
       var coord;
-      console.log(svg);
-      console.log(projection);
+      // console.log(svg);
+      // console.log(projection);
       // add circles to svg
       data = JSON.parse(data);
       svg.selectAll("circle")
@@ -112,8 +118,8 @@ var renderPoints = function (params) {
 };
 
 var animatePoints = function() {
-  console.log(svg);
-  console.log(projection);
+  // console.log(svg);
+  // console.log(projection);
   svg.selectAll("circle")
   .attr("r", "0px")
   .attr("stroke", "red")
