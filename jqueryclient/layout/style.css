@@ -71,7 +71,7 @@ body, html {
 svg {
   margin: 20px;
   fill: rgba(31, 29, 29, 0);
-  stroke: rgba(255, 255, 255, 0.32);
+  stroke: rgba(255, 255, 255, 0.1);
 }
 
 svg circle {
@@ -79,7 +79,7 @@ svg circle {
 }
 
 path:hover {
-  opacity: 0.5;
+  fill:rgba(255, 255, 255, 0.1);
 }
 
 .headerbar {

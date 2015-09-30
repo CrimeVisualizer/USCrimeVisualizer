@@ -20,16 +20,34 @@ var renderPoints = function (svg, projection) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
-      .attr("r", "2px")
+      // .attr("r", "2px")
 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-
-      // $('svg circle').hover(function() {
-      //   $("#details").text($(this).data("id") + " : " + $(this).data("name"));
-      // });
+      animatePoints(svg);
   });
+};
+
+var animatePoints = function(svg) {
+  svg.selectAll("circle")
+  .attr("r", "0px")
+  .attr("stroke", "red")
+  .transition(500)
+  .delay(function(d) {
+    var time = d.Time.split(":");
+    return (time[0] * 1000) + ((time[1] / 60) * 1000);
+  })
+  .ease("cubic-in-out")
+  .attr("r", "1px")
+  .attr("stroke", "red")
+  .transition()
+  .delay(function(d) {
+    var time = d.Time.split(":");
+    return ((time[0] * 1000) + ((time[1] / 60) * 1000) + 1000);
+  })
+  .ease("cubic-in-out")
+  .attr("r", "0px");
 };
 
 var render = function () {
