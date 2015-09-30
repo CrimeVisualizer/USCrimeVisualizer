@@ -2,16 +2,16 @@ var svg, projection;
 
 
 
-var getData = function (callback, params) {
+var getData = function (callback) {
   console.log('got in ajax request');
-  $.get('/api/events/' + params , function (data) {
+  $.get('/api/events/', function (data) {
     callback(data);
   });
 };
 
 // Get Google Reverse Geocode API data - passes latLong for Google API lookup
 // https://developers.google.com/maps/documentation/geocoding/intro?csw=1#ReverseGeocoding
-/*var getZipcode = function (latLong, callback) {
+var getZipcode = function (latLong, callback) {
   console.log('Got the Google Zipcode data');
 
   // Build URL string for query
@@ -24,16 +24,24 @@ var getData = function (callback, params) {
     console.log(data.results[7]["long_name"]);
     callback(data);
   });
+};
+
 
 
 // Calculates min and max of crime data set for use in quantize
-var dataMax = _.max(data, function(item) {
-  return item['count'];
-});
-var dataMin = _.min(data, function(item) {
-  return item['count'];
-});
-*/
+var getMaxMin = function (data) {
+  var resultArray = [];
+  var dataMax = _.max(data, function(item) {
+    return item['count'];
+  });
+  var dataMin = _.min(data, function(item) {
+    return item['count'];
+  });
+  resultArray.push(dataMin);
+  resultArray.push(dataMax);
+  return resultArray;
+};
+
 
 // Generates a range of 9 values within the provided domain.
 // Function used to generated CSS class values, 0-8.
