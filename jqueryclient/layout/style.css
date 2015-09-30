@@ -1,0 +1,62 @@
+body, html {
+  font-family: "Roboto", arial, sans-serif;
+  overflow-x: hidden; 
+}
+
+#main {
+  min-height: 500px;
+  margin-bottom: 150px;
+}
+
+#map {
+  background-color: #101010;
+  padding: 50px;
+  color: white;
+  text-align: center;
+}
+
+#sidebar form {
+  /*background-color: #fcfcfc;*/
+  background-color: rgba(200,200,200,0.09);
+  margin-bottom: 40px;
+  margin-left: 30px;
+  margin-top: 10%;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+#browse {
+  margin-left: 130px;
+}
+
+#d3Map {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+svg {
+  margin: 20px;
+  fill: rgba(31, 29, 29, 0);
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+svg circle {
+  fill: rgba(11, 134, 224, 0.81);
+}
+
+path:hover {
+  fill:rgba(255, 255, 255, 0.1);
+}
+
+.headerbar {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navColor {
+  background-color: #1e88e5;
+  margin-bottom: 40px;
+  z-index: 100;
+}
