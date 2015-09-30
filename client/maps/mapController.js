@@ -1,13 +1,8 @@
 angular.module('crimevis.maps', [])
 
-.controller('mapController', function($scope, Events, Maps) {
-  var chooseMap = {
-    'San Francisco': 'sfMap',
-    'New York': 'nyMap',
-    'Chicago': 'chiMap'
-  }
-  // controle.log(Maps.sfMap)
-  $scope.data = {map: Maps.sfMap};
+.controller('mapController', function($scope, Events, MapData) {
+  $scope.data = {};
+  $scope.data.map = MapData.sfmap;
   // limit the number of requests to the server
   // var requests = 0;
   $scope.getEvents = function() {

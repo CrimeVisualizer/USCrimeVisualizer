@@ -1,15 +1,18 @@
-body {
+body, html {
   font-family: "Roboto", arial, sans-serif;
+  overflow-x: hidden; 
+  overflow-y: hidden;
 }
 
 #main {
   min-height: 500px;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
 }
 
 #map {
   background-color: #101010;
-  padding-top: 50px;
+  padding: 50px;
+  margin-bottom: 150px;
   color: white;
   text-align: center;
 }

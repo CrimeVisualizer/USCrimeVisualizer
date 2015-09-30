@@ -1,5 +1,5 @@
 <div class="row" id="map" ng-controller="mapController">
-  <div class="col s1"></div>
+  <!-- <div class="col s1"></div> -->
   <div class="form-group col s2" id="sidebar">
     <form name="filterData">
       <p>
@@ -14,13 +14,14 @@
         <input type="checkbox" id="test5" />
         <label for="test5">Test filter</label>
       </p>
+      <button class="btn">Submit</button>
     </form>
   </div>
 
 
   <div class="col s9">
-    <h4>A Neighborhood Map of San Francisco</h4>
-    <p id="details">Hover over a neighborhood for details</p>
+    <h5>A Neighborhood Map of San Francisco</h5>
+ 
     <div id="neighborhood">
       <d3-map data="data">
         <!-- <d3-events data="data.events"></d3-events> -->
