@@ -11,7 +11,7 @@ angular.module('crimevis.directives', ['crimevis.services'])
 
     link: function (scope, element, attrs) {
       d3Service.d3().then(function(d3) {
-        var width = 0.75 * window.innerWidth, height = 0.75 * window.innerHeight;
+        var width = 0.85 * window.innerWidth, height = 0.85 * window.innerHeight;
 
         var svg = d3.select(element[0]).append("svg").attr("width", width).attr("height", height);
         // Resize any d3 elements when the window resizes
