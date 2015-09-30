@@ -22,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../jqueryclient')));
 // app.use(express.static(path.join(__dirname, '../client')));
 
-app.use('/', routes);
 app.use('/api/events', events);
 // app.use('/api/graphs', graphs);
 // app.use('/users', users);
@@ -34,7 +33,6 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace
