@@ -50,26 +50,38 @@ var quantize = d3.scale.quantize()
 
 // Append zipcode to each record
 // Uses Google API
-  newData = [];
-var appendZipcode = function(data) {
+var appendZipcode = function(data, callbackA) {
   data = JSON.parse(data);
+  var newData = [];
+
+// var callback = function (record) {
+//   console.log('callback called');
+//   newData.push(record);
+// };
+
   // Iterate over each record in the data
-  _.each(data, function(record) {
+  async.forEachOf(data, function(record, key, callback) {
     // Get lat & long from data
     var yCoord = record.Y;
     var xCoord = record.X;
-     var latLong = yCoord + ',' + xCoord;
-     // console.log(latLong);
+    var latLong = yCoord + ',' + xCoord;
 
     // Call Google API with record's lat and long
     getZipcode(latLong, function (zipcode) {
       record['zipcode'] = zipcode;
-      console.log(record);
       newData.push(record);
-    });
+      callback();
+    })
+
+  }, function(err) {
+
+    if (err) {
+      console.log(err.message);
+    }
+    callbackA(newData);
+    console.log('1', newData);
   });
 };
-  console.log(newData);
 
 // Sum each zipcode count by each record
 var getZipcodeCount = function (data) {
@@ -155,9 +167,12 @@ var renderHeatMap = function (params) {
   // Renders the Heat Map graphics
   getData(function(data) {
     // Get zipcode for each entry and append to dataset
-    appendZipcode(data);
-    // Run summing function on zipcode data
-    // getZipcodeCount()
+    var newData = appendZipcode(data, function (data) {
+      console.log("data!", data);
+      // Run summing function on zipcode data
+      var zipcodeCount = getZipcodeCount(data);
+      console.log('zipcodeCount', zipcodeCount);        
+    });
 
     // Render the heat map
     svg.selectAll("path")
