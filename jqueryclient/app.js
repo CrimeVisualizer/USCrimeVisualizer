@@ -24,7 +24,7 @@ var getZipcode = function (latLong, callback) {
 
 
 // Calculates min and max of crime data set for use in quantize
-/*var getMaxMin = function (data) {
+var getMaxMin = function (data) {
   var resultArray = [];
   var dataMax = _.max(data, function(item) {
     return item['count'];
@@ -36,7 +36,7 @@ var getZipcode = function (latLong, callback) {
   resultArray.push(dataMax);
   return resultArray;
 };
-*/
+
 
 
 // Generates a range of 9 values within the provided domain.
@@ -54,10 +54,6 @@ var appendZipcode = function(data, callbackA) {
   data = JSON.parse(data);
   var newData = [];
 
-// var callback = function (record) {
-//   console.log('callback called');
-//   newData.push(record);
-// };
 
   // Iterate over each record in the data
   async.forEachOf(data, function(record, key, callback) {
@@ -193,7 +189,7 @@ var renderHeatMap = function (params) {
 
 
 // Renders standard map
-/*var render = function () {
+var render = function () {
   var width = .8 * window.innerWidth, height = .85 * window.innerHeight;
 
   // Creates the map svg
@@ -218,9 +214,9 @@ var renderHeatMap = function (params) {
   }).attr('data-name', function(d) {
     return d.properties.name;
   });
-};*/
+};
 
 
 renderHeatMap();
 // render();
-// renderPoints();
+renderPoints();
