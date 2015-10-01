@@ -140,7 +140,7 @@ var animatePoints = function() {
   .attr("r", "0px");
 };
 
-// // Renders Heat Map - this is rendered in place of standard map
+// Renders Heat Map - this is rendered in place of standard map
 var renderHeatMap = function (params) {
 
   // Create the D3 map
@@ -168,29 +168,29 @@ var renderHeatMap = function (params) {
   getData(function(data) {
     // Get zipcode for each entry and append to dataset
     var newData = appendZipcode(data, function (data) {
-      console.log("data!", data);
       // Run summing function on zipcode data
       var zipcodeCount = getZipcodeCount(data);
-      console.log('zipcodeCount', zipcodeCount);        
+      console.log('zipcodeCount', zipcodeCount); 
+
+      // Render the heat map
+      svg.selectAll("path")
+        .data(gsfmap.features)
+      .enter().append("path")
+        .attr("d", path)
+          .attr('data-id', function(d) {
+            return d.id;
+          }).attr('data-name', function(d) {
+            return d.properties.name;
+          })
+          // .style("fill", "#ffffff").style("stroke", "#111111")   REMOVE ME AFTER TESTING!
+          .attr("class", function(d) {
+            console.log(zipcodeCount[d.id]);
+            return quantize(zipcodeCount[d.id]); // Quantize by total crimes per zipcode
+          });
     });
-
-    // Render the heat map
-    svg.selectAll("path")
-      .data(data.features)
-    .enter().append("path")
-      .attr("d", path)
-        .attr('data-id', function(d) {
-          return d.id;
-        }).attr('data-name', function(d) {
-          return d.properties.name;
-        })
-        // .style("fill", "#ffffff").style("stroke", "#111111")   REMOVE ME AFTER TESTING!
-        .attr("class", function(d) {
-          return quantize(districtData[d.properties.name]); // Quantize by total crimes per zipcode
-        });
-
   });
 };
+
 
 // Renders standard map
 /*var render = function () {
@@ -223,4 +223,4 @@ var renderHeatMap = function (params) {
 
 renderHeatMap();
 // render();
-renderPoints();
+// renderPoints();
