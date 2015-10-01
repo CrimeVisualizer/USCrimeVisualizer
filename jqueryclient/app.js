@@ -25,12 +25,12 @@ var renderPoints = function (params) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
-      // .attr("r", "2px")
+      .attr("r", "2px")
 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      animatePoints();
+      // animatePoints();
   }, params);
 };
 
