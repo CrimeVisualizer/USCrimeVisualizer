@@ -60,3 +60,27 @@ path:hover {
   margin-bottom: 40px;
   z-index: 100;
 }
+button {
+  background-color: black;
+  border: 2 px;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+button.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 60px;          
+    height: 28px;         
+    padding: 2px;       
+    font: 5px sans-serif;    
+    background: red; 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;     
+}

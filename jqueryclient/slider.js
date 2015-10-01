@@ -20,17 +20,15 @@ var getMonth = function() {
   var month = $('.active.month').attr("id");
   console.log(year, month);
   renderPoints('date=' + year + '-' + month);
-  // $.get('/slider', function (data) {
-  //   callback(data);
-  // });
-
 }
 
 $(".year").on("click", function(e) {
+  $(".year").removeAttr("class", "active");
   $(this).attr("class", "active year");
   console.log(this);
 });
 $(".month").on("click", function(e) {
+  $(".month").removeAttr("class", "active");
   $(this).attr("class", "active month");
   getMonth();
 });

@@ -1,8 +1,8 @@
 var svg, projection;
 
 var getData = function (callback, params) {
-  console.log('got in ajax request');
   $.get('/api/events/' + params , function (data) {
+    console.log(params);
     callback(data);
   });
 };
@@ -10,8 +10,10 @@ var getData = function (callback, params) {
 var renderPoints = function (params) {
   getData(function (data) {
       var coord;
-      console.log(svg);
-      console.log(projection);
+
+      var div = d3.select("body").append("div") 
+          .attr("class", "tooltip")       
+          .style("opacity", 0);
       // add circles to svg
       data = JSON.parse(data);
       svg.selectAll("circle")
@@ -25,12 +27,29 @@ var renderPoints = function (params) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
+      .attr("r", "1px") 
+      .attr("stroke", "red")
+      .on("mouseover", function(d) {    
+          div.transition()    
+             .duration(200)    
+             .style("opacity", .9);    
+          div.text(d.Category)  
+             .style("left", (d3.event.pageX) + "px")   
+             .style("top", (d3.event.pageY - 28) + "px");
+          })          
+      .on("mouseout", function(d) {   
+          div.transition()    
+              .duration(500)    
+              .style("opacity", 0); 
+          svg.selectAll('circle')
+          .attr("r", "1px");
+      });
       // .attr("r", "2px")
 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      animatePoints();
+      // animatePoints();
   }, params);
 };
 
