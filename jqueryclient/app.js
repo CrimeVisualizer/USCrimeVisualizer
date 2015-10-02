@@ -22,22 +22,20 @@ var getZipcode = function (latLong, callback) {
   });
 };
 
-
 // Calculates min and max of crime data set for use in quantize
 var getMaxMin = function (data) {
   var resultArray = [];
   var dataMax = _.max(data, function(item) {
-    return item['count'];
+    return item;
   });
   var dataMin = _.min(data, function(item) {
-    return item['count'];
+    return item;
   });
   resultArray.push(dataMin);
   resultArray.push(dataMax);
+  // console.log(resultArray);
   return resultArray;
 };
-
-
 
 // Generates a range of 9 values within the provided domain.
 // Function used to generated CSS class values, 0-8.
@@ -167,6 +165,9 @@ var renderHeatMap = function (params) {
       // Run summing function on zipcode data
       var zipcodeCount = getZipcodeCount(data);
       console.log('zipcodeCount', zipcodeCount); 
+
+    var maxMinArray = getMaxMin(zipcodeCount);
+    console.log('maxMinArray', maxMinArray);
 
       // Render the heat map
       svg.selectAll("path")
