@@ -161,3 +161,27 @@ path:hover {
 #zoomButtons ul li {
   display: inline-block;
 }
+
+
+
+#overlay path,
+#overlay circle {
+  fill: #222;
+  stroke: #5f0;
+  stroke-opacity: 0;
+}
+
+#overlay .lit {
+  /*fill: #0e0;*/
+  fill: orange;
+  stroke-opacity: 1;
+}
+
+#clock {
+  width: 15%;
+  /*height: 10%;*/
+  position: relative;
+  top: 2%;
+  left: 40%;
+}
+

@@ -128,11 +128,55 @@ var render = function () {
   }
 
   d3.selectAll(".zoom").on('click', zoomClick);
- 
+
 
   renderPoints(svg, projection);
 };
 
-// d3.selectAll('#zoom_out').on('click', zoomOut);
+// Set up clock on the screen
 
+var svgOverlay = d3.select("#clockBoard");
+
+var svg = d3.selectAll("#clock");
+
+
+svgOverlay.attr("id", "overlay");
+
+var digit = svg.selectAll(".digit");
+var separator = svg.selectAll(".separator circle");
+
+var digitPattern = [
+  [1,0,1,1,0,1,1,1,1,1],
+  [1,0,0,0,1,1,1,0,1,1],
+  [1,1,1,1,1,0,0,1,1,1],
+  [0,0,1,1,1,1,1,0,1,1],
+  [1,0,1,0,0,0,1,0,1,0],
+  [1,1,0,1,1,1,1,1,1,1],
+  [1,0,1,1,0,1,1,0,1,1]
+];
+
+function tick (dtg) {
+  var now = new Date(dtg),
+      hours = now.getHours(),
+      minutes = now.getMinutes(),
+      seconds = now.getSeconds();
+
+  digit = digit.data([hours / 10 | 0, hours % 10, minutes / 10 | 0, minutes % 10, seconds / 10 | 0, seconds % 10]);
+  digit.select("path:nth-child(1)").classed("lit", function(d) { return digitPattern[0][d]; });
+  digit.select("path:nth-child(2)").classed("lit", function(d) { return digitPattern[1][d]; });
+  digit.select("path:nth-child(3)").classed("lit", function(d) { return digitPattern[2][d]; });
+  digit.select("path:nth-child(4)").classed("lit", function(d) { return digitPattern[3][d]; });
+  digit.select("path:nth-child(5)").classed("lit", function(d) { return digitPattern[4][d]; });
+  digit.select("path:nth-child(6)").classed("lit", function(d) { return digitPattern[5][d]; });
+  digit.select("path:nth-child(7)").classed("lit", function(d) { return digitPattern[6][d]; });
+  separator.classed("lit", minutes & 1);
+
+  // setTimeout(tick, 1000 - now % 1000);
+
+  setTimeout(function() {
+    tick(now.getTime() + 60000)
+  }, 800)
+}
+
+tick("Wednesday,09/09/2015,00:00");
 render();
