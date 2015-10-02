@@ -20,12 +20,12 @@ var renderPoints = function (svg, projection) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
-      // .attr("r", "2px")
+      .attr("r", "2px");
 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      animatePoints(svg);
+      // animatePoints(svg);
   });
 };
 
@@ -79,14 +79,14 @@ var render = function () {
     return d.properties.name;
   });
   
-  var zoomed = function () {
+  function zoomed () {
       svg.attr("transform",
           "translate(" + zoom.translate() + ")" +
           "scale(" + zoom.scale() + ")"
       );
   }
 
-  var interpolateZoom = function (translate, scale) {
+  function interpolateZoom (translate, scale) {
       return d3.transition().duration(350).tween("zoom", function () {
           var iTranslate = d3.interpolate(zoom.translate(), translate),
               iScale = d3.interpolate(zoom.scale(), scale);
@@ -99,7 +99,7 @@ var render = function () {
       });
   }
 
-  var zoomClick = function () {
+  function zoomClick () {
       var clicked = d3.event.target,
           direction = 1,
           factor = 0.2,
