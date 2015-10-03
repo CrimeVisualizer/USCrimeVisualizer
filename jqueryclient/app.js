@@ -7,6 +7,9 @@ var getData = function (callback) {
   });
 };
 
+console.log(gsfmap);
+
+
 // Get Google Reverse Geocode API data - passes latLong for Google API lookup
 //https://developers.google.com/maps/documentation/geocoding/intro?csw=1#ReverseGeocoding
 var getZipcode = function (latLong, callback) {
@@ -91,7 +94,6 @@ var renderPoints = function (params) {
       // console.log(projection);
       // add circles to svg
       data = JSON.parse(data);
-      console.log(data);
       svg.selectAll("circle")
       .data(data).enter()
       .append("circle")
@@ -158,17 +160,31 @@ var renderHeatMap = function (params) {
   var transl = [(width - scale * (bounds[1][0] + bounds[0][0])) / 2, (height - scale * (bounds[1][1] + bounds[0][1])) / 2];
   projection.scale(scale).translate(transl);
 
+  // Import data
+  var aggregate = { '94102': 288,
+    '94103': 491,
+    '94105': 65,
+    '94107': 158,
+    '94108': 71,
+    '94109': 180,
+    '94110': 278,
+    '94111': 73,
+    '94112': 158,
+    '94114': 98,
+    '94115': 112,
+    '94116': 49,
+    '94117': 151,
+    '94118': 69,
+    '94122': 102,
+    '94123': 70,
+    '94124': 212,
+    '94127': 36,
+    '94131': 48,
+    '94132': 52,
+    '94134': 71,
+    undefined: 239 }
 
-  // Renders the Heat Map graphics
-  getData(function(data) {
-    console.log(data);
-    // Get zipcode for each entry and append to dataset
-    var newData = appendZipcode(data, function (data) {
-      // Run summing function on zipcode data
-      var zipcodeCount = getZipcodeCount(data);
-      console.log('zipcodeCount', zipcodeCount); 
-
-    var maxMinArray = getMaxMin(zipcodeCount);
+    var maxMinArray = getMaxMin(aggregate);
     console.log('maxMinArray', maxMinArray);
 
       // Render the heat map
@@ -181,13 +197,9 @@ var renderHeatMap = function (params) {
           }).attr('data-name', function(d) {
             return d.properties.name;
           })
-          // .style("fill", "#ffffff").style("stroke", "#111111")   REMOVE ME AFTER TESTING!
           .attr("class", function(d) {
-            console.log(zipcodeCount[d.id]);
-            return quantize(zipcodeCount[d.id]); // Quantize by total crimes per zipcode
+            return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
           });
-    });
-  });
 };
 
 
@@ -220,6 +232,6 @@ var render = function () {
 };
 
 
-// renderHeatMap();
-render();
+renderHeatMap();
+// render();
 renderPoints();
