@@ -91,6 +91,7 @@ var renderPoints = function (params) {
       // console.log(projection);
       // add circles to svg
       data = JSON.parse(data);
+      console.log(data);
       svg.selectAll("circle")
       .data(data).enter()
       .append("circle")
@@ -160,6 +161,7 @@ var renderHeatMap = function (params) {
 
   // Renders the Heat Map graphics
   getData(function(data) {
+    console.log(data);
     // Get zipcode for each entry and append to dataset
     var newData = appendZipcode(data, function (data) {
       // Run summing function on zipcode data
@@ -218,6 +220,6 @@ var render = function () {
 };
 
 
-renderHeatMap();
-// render();
+// renderHeatMap();
+render();
 renderPoints();
