@@ -1,15 +1,46 @@
+window.data = {};
+
+var projection;
+
 var getData = function (callback) {
   $.get('/api/events', function (data) {
     callback(data);
   });
 };
 
-var renderPoints = function (svg, projection) {
-  getData(function (data) {
-      var coord;
+// var renderPoints = function (svg, projection) {
+//   // getData();
+//   function (data) {
+//       var coord;
+//       // add circles to svg
+//       data = JSON.parse(data);
+//       svg.selectAll("circle")
+//       .data(data).enter()
+//       .append("circle")
+//       .attr("cx", function (d) {
+//         coord = [d.X, d.Y];
+//         return projection(coord)[0]; 
+//       })
+//       .attr("cy", function (d) { 
+//         coord = [d.X, d.Y];
+//         return projection(coord)[1]; 
+//       })
+//       .attr("r", "2px");
+
+//       $('svg path').hover(function() {
+//         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
+//       });
+//       // animatePoints(svg);
+//   }
+// };
+
+var renderPoints = function (data, callback) {
+        var coord;
       // add circles to svg
-      data = JSON.parse(data);
-      svg.selectAll("circle")
+      // debugger;
+      // data = JSON.parse(data);
+      var svg = d3.select("#city").selectAll("svg");
+      svg.selectAll("circle").remove()
       .data(data).enter()
       .append("circle")
       .attr("cx", function (d) {
@@ -25,9 +56,8 @@ var renderPoints = function (svg, projection) {
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      // animatePoints(svg);
-  });
-};
+      callback();
+}
 
 var animatePoints = function(svg) {
   svg.selectAll("circle")
@@ -49,6 +79,7 @@ var animatePoints = function(svg) {
   .attr("r", "0px");
 };
 
+
 var render = function () {
   var width = .9 * window.innerWidth, height = .9 * window.innerHeight;
   var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
@@ -60,7 +91,7 @@ var render = function () {
      
 
   // Map of San Francisco
-  var projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
+  projection = d3.geo.mercator().scale(1).translate([0, 0]).precision(0);
   var path = d3.geo.path().projection(projection);
 
   // gsfmap is a global variable from map/map.js
@@ -130,7 +161,7 @@ var render = function () {
   d3.selectAll(".zoom").on('click', zoomClick);
 
 
-  renderPoints(svg, projection);
+  // renderPoints(svg, projection);
 };
 
 // Set up clock on the screen
@@ -169,14 +200,41 @@ function tick (dtg) {
   digit.select("path:nth-child(5)").classed("lit", function(d) { return digitPattern[4][d]; });
   digit.select("path:nth-child(6)").classed("lit", function(d) { return digitPattern[5][d]; });
   digit.select("path:nth-child(7)").classed("lit", function(d) { return digitPattern[6][d]; });
-  separator.classed("lit", minutes & 1);
+  separator.classed("lit", minutes);
+  // if current date matches an event, render that event on screen
+  // debugger;
+  if (window.data[now]) {
+    debugger;
+    renderPoints(window.data[now], function () {
+      setTimeout(function() {
+        tick(now.getTime() + 60000)
+      }, 800);
+    });
 
-  // setTimeout(tick, 1000 - now % 1000);
-
-  setTimeout(function() {
-    tick(now.getTime() + 60000)
-  }, 800)
+  } else {
+    setTimeout(function() {
+      tick(now.getTime() + 60000)
+    }, 800);
+    // tick(now.getTime() + 60000);
+  }
+  // animate the clock so that every 800 ms is a minute
 }
 
-tick("Wednesday,09/09/2015,00:00");
-render();
+var day = "Wednesday,09/09/2015,";
+
+getData(function (data) {
+  // save results of data in window for fast lookup by date time group
+  data = JSON.parse(data);
+  // debugger;
+  for (var i = 0; i < data.length; i++) {
+    // debugger;
+    var dtg = new Date(day + data[i].Time);
+    if (window.data[dtg]) {
+      window.data[dtg].push(data[i]);
+    } else { // in case there are multiple events at the same time, we will store them in an array
+      window.data[dtg] = [data[i]];
+    }
+  }
+  render();
+  tick(day + "00:00");
+});
