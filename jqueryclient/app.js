@@ -45,7 +45,6 @@ var renderPoints = function (params) {
           .attr("r", "1px");
       });
       // .attr("r", "2px")
-
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
@@ -57,7 +56,7 @@ var animatePoints = function() {
   console.log(svg);
   console.log(projection);
   svg.selectAll("circle")
-  .attr("r", "0px")
+  // .attr("r", "0px")
   .attr("stroke", "red")
   .transition(500)
   .delay(function(d) {
