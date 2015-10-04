@@ -1,6 +1,17 @@
 window.data = {};
 
-var projection;
+var projection, now;
+var currentTime = "00:00";
+var play = false;
+
+// have a global variable for current time
+
+// that variable is set to where the clock is currently at
+
+// another global variable play is set to false initially
+// when true, the animation will play
+// play button has a on click event
+// the callback should set play to true and relaunch tick function
 
 var getData = function (callback) {
   $.get('/api/events', function (data) {
@@ -35,9 +46,9 @@ var getData = function (callback) {
 // };
 
 var renderPoints = function (data, callback) {
-        var coord;
+      var coord;
+
       // add circles to svg
-      // debugger;
       // data = JSON.parse(data);
       var svg = d3.select("#city").selectAll("svg");
       svg.selectAll("circle").remove()
@@ -52,6 +63,11 @@ var renderPoints = function (data, callback) {
         return projection(coord)[1]; 
       })
       .attr("r", "2px");
+      // .transition()
+      // .delay(1500)
+      // .ease("cubic-in-out")
+      // .style("fill", "#eeeeee")
+      // .attr("r", "0px");
 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
@@ -61,6 +77,8 @@ var renderPoints = function (data, callback) {
 
 var animatePoints = function(svg) {
   svg.selectAll("circle")
+  .append("g")
+  .call(zoom)
   .attr("r", "0px")
   .transition(500)
   .delay(function(d) {
@@ -187,40 +205,44 @@ var digitPattern = [
 ];
 
 function tick (dtg) {
-  var now = new Date(dtg),
-      hours = now.getHours(),
-      minutes = now.getMinutes(),
-      seconds = now.getSeconds();
+    now = new Date(dtg),
+        hours = now.getHours(),
+        minutes = now.getMinutes(),
+        seconds = now.getSeconds();
+    
 
-  digit = digit.data([hours / 10 | 0, hours % 10, minutes / 10 | 0, minutes % 10, seconds / 10 | 0, seconds % 10]);
-  digit.select("path:nth-child(1)").classed("lit", function(d) { return digitPattern[0][d]; });
-  digit.select("path:nth-child(2)").classed("lit", function(d) { return digitPattern[1][d]; });
-  digit.select("path:nth-child(3)").classed("lit", function(d) { return digitPattern[2][d]; });
-  digit.select("path:nth-child(4)").classed("lit", function(d) { return digitPattern[3][d]; });
-  digit.select("path:nth-child(5)").classed("lit", function(d) { return digitPattern[4][d]; });
-  digit.select("path:nth-child(6)").classed("lit", function(d) { return digitPattern[5][d]; });
-  digit.select("path:nth-child(7)").classed("lit", function(d) { return digitPattern[6][d]; });
-  separator.classed("lit", minutes);
-  // if current date matches an event, render that event on screen
-  // debugger;
-  if (window.data[now]) {
-    debugger;
-    renderPoints(window.data[now], function () {
+    digit = digit.data([hours / 10 | 0, hours % 10, minutes / 10 | 0, minutes % 10, seconds / 10 | 0, seconds % 10]);
+    digit.select("path:nth-child(1)").classed("lit", function(d) { return digitPattern[0][d]; });
+    digit.select("path:nth-child(2)").classed("lit", function(d) { return digitPattern[1][d]; });
+    digit.select("path:nth-child(3)").classed("lit", function(d) { return digitPattern[2][d]; });
+    digit.select("path:nth-child(4)").classed("lit", function(d) { return digitPattern[3][d]; });
+    digit.select("path:nth-child(5)").classed("lit", function(d) { return digitPattern[4][d]; });
+    digit.select("path:nth-child(6)").classed("lit", function(d) { return digitPattern[5][d]; });
+    digit.select("path:nth-child(7)").classed("lit", function(d) { return digitPattern[6][d]; });
+    separator.classed("lit", minutes);
+
+  if (play) {
+    // if current date matches an event, render that event on screen
+    if (window.data[now]) {
+      renderPoints(window.data[now], function () {
+        setTimeout(function() {
+          tick(now.getTime() + 60000)
+        }, 1000);
+      });
+
+    } else {
       setTimeout(function() {
         tick(now.getTime() + 60000)
-      }, 800);
-    });
-
-  } else {
-    setTimeout(function() {
-      tick(now.getTime() + 60000)
-    }, 800);
-    // tick(now.getTime() + 60000);
+      }, 1000);
+      // tick(now.getTime() + 60000);
+    }
+    // animate the clock so that every 1000 ms is a minute
   }
-  // animate the clock so that every 800 ms is a minute
 }
 
 var day = "Wednesday,09/09/2015,";
+
+
 
 getData(function (data) {
   // save results of data in window for fast lookup by date time group
@@ -236,5 +258,12 @@ getData(function (data) {
     }
   }
   render();
-  tick(day + "00:00");
+  tick(day + currentTime);
 });
+
+d3.select("#play").on("click", function () {
+  // debugger;
+  play = !play;
+  tick(now);
+});
+
