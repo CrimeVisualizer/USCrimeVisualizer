@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../jqueryclient')));
 // app.use(express.static(path.join(__dirname, '../client')));
 
+
 app.use('/api/events', events);
 // app.use('/api/graphs', graphs);
 // app.use('/users', users);

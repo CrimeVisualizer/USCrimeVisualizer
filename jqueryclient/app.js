@@ -1,5 +1,6 @@
 var svg, projection;
 
+
 var getData = function (callback, params) {
   /* Makes ajax call to database with 
      the needed params. eg the start date from where to fetch crimes
@@ -9,6 +10,7 @@ var getData = function (callback, params) {
     callback(data);
   });
 };
+
 
 var renderPoints = function (params) {
   // renders points of crime on the map created by render() function call 
@@ -41,6 +43,7 @@ var renderPoints = function (params) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
+
       .attr("r", "1px") 
       .attr("stroke", "red")
       .on("mouseover", function(d) {
@@ -60,7 +63,6 @@ var renderPoints = function (params) {
           svg.selectAll('circle')
           .attr("r", "1px");
       });
-
       // displays the district name on top of the map on hover 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
@@ -71,9 +73,10 @@ var renderPoints = function (params) {
 };
 
 var animatePoints = function() {
+
   // set all the crime dots to invisible
   svg.selectAll("circle")
-  .attr("r", "0px")
+  // .attr("r", "0px")
   .attr("stroke", "red")
   // they will take 500 ms to appear
   .transition(500)
@@ -96,6 +99,7 @@ var animatePoints = function() {
   .ease("cubic-in-out")
   .attr("r", "0px");
 };
+
 
 var render = function () {
   // Renders the map (districts outline) into the city div. 

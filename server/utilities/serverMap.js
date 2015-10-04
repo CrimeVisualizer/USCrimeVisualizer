@@ -1,6 +1,4 @@
-// the gsfmap variable holds topoJSON info about San Francisco's districts
-// the variable is prefixed with 'g' because it is use globally across files
-var gsfmap = {
+exports.gsfmap = {
   "features" : [{
     "geometry" : {
       "geometries" : [{
@@ -340,6 +338,3 @@ var gsfmap = {
   }],
   "type" : "FeatureCollection"
 };
-
-
-// Add more maps below
