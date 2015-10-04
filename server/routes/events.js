@@ -28,7 +28,7 @@ router.get('/date=:date', function (req, res, next) {
   ]
 
   connection(function (db) {
-    db.collection('crimes').find({$or: search}).toArray(function(err, results) {
+    db.collection('allCrimes').find({$or: search}).toArray(function(err, results) {
       res.send(JSON.stringify(results));
     });
   });
