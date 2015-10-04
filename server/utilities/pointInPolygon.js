@@ -1,9 +1,10 @@
+// Adds zipcode data to crime dataset. Zipcode data is used to 
+// create the heatmap.
+
 var inside = require('point-in-polygon');
 var map = require('./serverMap.js');
 var _ = require('underscore');
 var data = require('./data.js');
-
-// console.log(map['gsfmap'])
 
 // Parse the map for polygons + zipcode - Array of objects
 var polygonsZips = {};
@@ -22,12 +23,10 @@ _.each(map['gsfmap']['features'], function (item) {
   }
 });
 
-var res = _.find(polygonsZips, function (val, key) {
-  return key === '94110'
-})
-// console.log(res);
-
-
+// Trouble shooting function 
+// var res = _.find(polygonsZips, function (val, key) {
+//   return key === '94110'
+// })
 
 
 // Adds Zipcode coding to each entry in the crime dataset
@@ -56,7 +55,7 @@ _.each(data.crimeData, function (record) {
   });
 });
 
-// Query the dataset for zipcode aggregate by certain timeframe
+// Todo: Query the dataset for zipcode aggregate by certain timeframe
 
 // Sum each zipcode count by each record
 var getZipcodeCount = function (data) {
@@ -66,8 +65,6 @@ var getZipcodeCount = function (data) {
 };
 
 var aggregate = getZipcodeCount(data.crimeData);
-console.log(aggregate)
-
 
 // Lists out the lat/longs that were not successfully classified
 var store = [];
@@ -76,8 +73,6 @@ _.each(data.crimeData, function (record) {
     store.push(record['Address']);
   }
 });
-
-// console.log(store)
 
 
 

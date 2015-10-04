@@ -1,8 +1,9 @@
 var svg, projection;
 
-var getData = function (callback) {
-  console.log('got in ajax request');
-  $.get('/api/events/', function (data) {
+
+var getData = function (callback, params) {
+  $.get('/api/events/' + params , function (data) {
+    console.log(params);
     callback(data);
   });
 };
@@ -11,8 +12,10 @@ var getData = function (callback) {
 var renderPoints = function (params) {
   getData(function (data) {
       var coord;
-      // console.log(svg);
-      // console.log(projection);
+
+      var div = d3.select("body").append("div") 
+          .attr("class", "tooltip")       
+          .style("opacity", 0);
       // add circles to svg
       data = JSON.parse(data);
       svg.selectAll("circle")
@@ -26,20 +29,38 @@ var renderPoints = function (params) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
-      // .attr("r", "2px")
 
+      .attr("r", "1px") 
+      .attr("stroke", "red")
+      .on("mouseover", function(d) {    
+          div.transition()    
+             .duration(200)    
+             .style("opacity", .9);    
+          div.text(d.Category)  
+             .style("left", (d3.event.pageX) + "px")   
+             .style("top", (d3.event.pageY - 28) + "px");
+          })          
+      .on("mouseout", function(d) {   
+          div.transition()    
+              .duration(500)    
+              .style("opacity", 0); 
+          svg.selectAll('circle')
+          .attr("r", "1px");
+      });
+      // .attr("r", "2px")
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      animatePoints();
+      // animatePoints();
   }, params);
 };
 
 var animatePoints = function() {
-  // console.log(svg);
-  // console.log(projection);
+
+  console.log(svg);
+  console.log(projection);
   svg.selectAll("circle")
-  .attr("r", "0px")
+  // .attr("r", "0px")
   .attr("stroke", "red")
   .transition(500)
   .delay(function(d) {
@@ -59,7 +80,6 @@ var animatePoints = function() {
 };
 
 
-// Renders standard map
 var render = function () {
   var width = .8 * window.innerWidth, height = .85 * window.innerHeight;
 
@@ -89,4 +109,4 @@ var render = function () {
 
 
 render();
-renderPoints();
+// renderPoints();

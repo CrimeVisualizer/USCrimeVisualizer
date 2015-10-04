@@ -338,3 +338,6 @@ var gsfmap = {
   }],
   "type" : "FeatureCollection"
 };
+
+
+// Add more maps below
