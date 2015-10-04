@@ -7,23 +7,6 @@ var getData = function (callback) {
   });
 };
 
-console.log(gsfmap);
-
-
-// Get Google Reverse Geocode API data - passes latLong for Google API lookup
-//https://developers.google.com/maps/documentation/geocoding/intro?csw=1#ReverseGeocoding
-var getZipcode = function (latLong, callback) {
-
-  // Build URL string for query
-  var googleURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
-                  + latLong
-                  + '&key=AIzaSyDOKSY3LtWFhxGqEAcX7pLNfndGjkNVy-I';
-
-  $.get(googleURL , function (data) {
-    var zipcode = data['results'][0]['address_components'][7]['long_name'];
-    callback(zipcode);
-  });
-};
 
 // Calculates min and max of crime data set for use in quantize
 var getMaxMin = function (data) {
@@ -40,45 +23,7 @@ var getMaxMin = function (data) {
   return resultArray;
 };
 
-// Generates a range of 9 values within the provided domain.
-// Function used to generated CSS class values, 0-8.
-// Values correspond to a range of blues in CSS file (see CSS file)
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THE DOMAIN HARDCODE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-var quantize = d3.scale.quantize()
-    .domain([162, 622])
-    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
-    
 
-// Append zipcode to each record
-// Uses Google API
-var appendZipcode = function(data, callbackA) {
-  data = JSON.parse(data);
-  var newData = [];
-
-
-  // Iterate over each record in the data
-  async.forEachOf(data, function(record, key, callback) {
-    // Get lat & long from data
-    var yCoord = record.Y;
-    var xCoord = record.X;
-    var latLong = yCoord + ',' + xCoord;
-
-    // Call Google API with record's lat and long
-    getZipcode(latLong, function (zipcode) {
-      record['zipcode'] = zipcode;
-      newData.push(record);
-      callback();
-    })
-
-  }, function(err) {
-
-    if (err) {
-      console.log(err.message);
-    }
-    callbackA(newData);
-    console.log('1', newData);
-  });
-};
 
 // Sum each zipcode count by each record
 var getZipcodeCount = function (data) {
@@ -188,7 +133,14 @@ var renderHeatMap = function (params) {
   }
 
     var maxMinArray = getMaxMin(aggregate);
-    console.log('maxMinArray', maxMinArray);
+
+  // Generates a range of 9 values within the provided domain.
+  // Function used to generated CSS class values, 0-8.
+  // Values correspond to a range of blues in CSS file (see CSS file)
+  var quantize = d3.scale.quantize()
+      .domain(maxMinArray)
+      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+        
 
       // Render the heat map
       svg.selectAll("path")
@@ -201,6 +153,7 @@ var renderHeatMap = function (params) {
             return d.properties.name;
           })
           .attr("class", function(d) {
+            console.log(d.id, quantize(aggregate[d.id]));
             return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
           });
 };
