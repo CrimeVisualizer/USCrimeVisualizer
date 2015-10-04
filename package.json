@@ -7,9 +7,7 @@
     "start": "gulp",
     "lint": "jscs ./"
   },
-
   "pre-commit": "lint",
-
   "dependencies": {
     "body-parser": "~1.13.2",
     "chai": "^3.3.0",
@@ -17,6 +15,7 @@
     "debug": "~2.2.0",
     "express": "^4.13.3",
     "grunt": "^0.4.5",
+    "grunt-execute": "^0.2.2",
     "grunt-mocha-test": "^0.12.7",
     "grunt-nodemon": "^0.4.0",
     "grunt-shell": "^1.1.2",
@@ -26,9 +25,10 @@
     "mongodb": "^2.0.43",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
+    "point-in-polygon": "^1.0.0",
+    "underscore": "^1.8.3"
     "serve-favicon": "~2.3.0"
   },
-
   "devDependencies": {
     "browser-sync": "^1.5.7",
     "gulp": "^3.8.5",
@@ -38,14 +38,13 @@
     "gulp-nodemon": "^1.0.4",
     "gulp-shell": "^0.2.7",
     "karma": "^0.13.10",
-    "karma-nyan-reporter": "^0.2.2",
+    "karma-nyan-reporter": "0.0.43",
     "karma-unicorn-reporter": "^0.1.4",
     "karma-chrome-launcher": "^0.1.4",
     "karma-cli": "0.0.4",
     "karma-jasmine": "^0.1.5",
     "karma-mocha": "^0.1.4",
     "karma-nested-reporter": "^0.1.1",
-    "karma-nyan-reporter": "0.0.43",
     "karma-phantomjs-launcher": "^0.1.4",
     "jscs": "^2.1.1",
     "jshint-stylish": "^2.0.1",
