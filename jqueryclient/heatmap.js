@@ -1,3 +1,10 @@
+var getData = function (callback) {
+  $.get('/api/events/' , function (data) {
+    // console.log(params);
+    // callback(data);
+  });
+};
+
 // Calculates min and max of crime data set for use in quantize
 var getMaxMin = function (data) {
   var resultArray = [];
@@ -23,6 +30,17 @@ var getZipcodeCount = function (data) {
 
 // Renders Heat Map - this is rendered in place of standard map
 var renderHeatMap = function () {
+
+  // getData(function (data) {
+  //     var coord;
+
+  //     data = JSON.parse(data);
+  //     svg.selectAll("path")
+  //     .data(data).enter()
+      
+
+  //     });
+  // }, params);
 
   // Import data
   var aggregate = { '94102': 288,
@@ -63,9 +81,37 @@ var renderHeatMap = function () {
       // Render the heat map
       svg.selectAll("path")
           .attr("class", function(d) {
-            console.log(d.id, quantize(aggregate[d.id]));
             return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
           });
+};
+
+
+
+// Animate by month
+// Animate by day of the week
+
+// Animate by day 
+var animateHeatMap = function() {
+  svg.selectAll("path")
+  .transition(500)
+  .delay(function(d) {
+
+    // 09/09/2015
+
+    var date = d.Date.split("/")
+    return (date[0]);
+
+  })
+  .ease("cubic-in-out")
+  .attr("r", "1px")
+  .attr("stroke", "red")
+  .transition()
+  .delay(function(d) {
+    var time = d.Time.split(":");
+    return ((time[0] * 1000) + ((time[1] / 60) * 1000) + 1000);
+  })
+  .ease("cubic-in-out")
+  .attr("r", "0px");
 };
 
 renderHeatMap();

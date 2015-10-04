@@ -1,9 +1,9 @@
 var svg, projection;
 
 
-var getData = function (callback, params) {
-  $.get('/api/events/' + params , function (data) {
-    console.log(params);
+var getData = function (callback) {
+  $.get('/api/events/', function (data) {
+    // console.log(params);
     callback(data);
   });
 };
@@ -51,7 +51,7 @@ var renderPoints = function (params) {
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      // animatePoints();
+      animatePoints();
   }, params);
 };
 
@@ -110,3 +110,5 @@ var render = function () {
 
 render();
 // renderPoints();
+animatePoints();
+

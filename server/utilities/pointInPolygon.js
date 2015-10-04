@@ -55,6 +55,8 @@ _.each(data.crimeData, function (record) {
   });
 });
 
+// Todo: Save down data.Crimedata to database with zipcode data
+
 // Todo: Query the dataset for zipcode aggregate by certain timeframe
 
 // Sum each zipcode count by each record

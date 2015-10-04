@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
   // query DB for everything
   connection(function (db) {
 
-/* Temporarily commented out - this code block only used to generate zip code data. Only needs to be run once. 
+// Temporarily commented out - this code block only used to generate zip code data. Only needs to be run once. 
     db.collection('crimes').find({}, {X:1, Y:1, Time:1, Category:1, Descript:1, Address:1}).toArray(function(err, results) {
 
       var data = JSON.stringify(results);
@@ -26,14 +26,14 @@ router.get('/', function (req, res, next) {
     });
   })
 });
-*/
 
 
-    db.collection('crimes').find().toArray(function(err, results) {
-      res.send(JSON.stringify(results));
-    });
-  });
-});
+
+//     db.collection('crimes').find().toArray(function(err, results) {
+//       res.send(JSON.stringify(results));
+//     });
+//   });
+// });
 
 router.get('/date=:date', function (req, res, next) {
   // data is an object with year and month as variables
