@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "karma start karma.conf.js",
-    "start": "gulp",
+    "start": "bower install && grunt",
     "lint": "jscs ./"
   },
   "pre-commit": "lint",
@@ -25,9 +25,7 @@
     "mongodb": "^2.0.43",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
-  },
-  "devDependencies": {
+    "serve-favicon": "~2.3.0",
     "browser-sync": "^1.5.7",
     "gulp": "^3.8.5",
     "gulp-if": "^1.2.5",
@@ -48,5 +46,7 @@
     "jshint-stylish": "^2.0.1",
     "pre-commit": "^1.1.1",
     "supertest": "^1.1.0"
+  },
+  "devDependencies": {
   }
 }
