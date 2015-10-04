@@ -1,4 +1,4 @@
-var gsfmap = {
+exports.gsfmap = {
   "features" : [{
     "geometry" : {
       "geometries" : [{
@@ -338,6 +338,3 @@ var gsfmap = {
   }],
   "type" : "FeatureCollection"
 };
-
-
-// Add more maps below

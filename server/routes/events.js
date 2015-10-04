@@ -1,10 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('../connection')
+var fs = require('fs');
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   // query DB for everything
   connection(function (db) {
+
+/* Temporarily commented out - this code block only used to generate zip code data. Only needs to be run once. 
+    db.collection('crimes').find({}, {X:1, Y:1, Time:1, Category:1, Descript:1, Address:1}).toArray(function(err, results) {
+
+      var data = JSON.stringify(results);
+
+      // Write file to local filesystem to be used to append zipcode data to dataset
+      fs.writeFile( __dirname + "/../utilities/data.json", data, function(err) {
+
+          if(err) {
+              return console.log(err);
+          }
+
+          console.log("The file was saved!");
+          res.send(JSON.stringify(results));
+      }); 
+    });
+  })
+});
+*/
+
 
     db.collection('crimes').find().toArray(function(err, results) {
       res.send(JSON.stringify(results));

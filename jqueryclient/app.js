@@ -1,11 +1,13 @@
 var svg, projection;
 
+
 var getData = function (callback, params) {
   $.get('/api/events/' + params , function (data) {
     console.log(params);
     callback(data);
   });
 };
+
 
 var renderPoints = function (params) {
   getData(function (data) {
@@ -27,6 +29,7 @@ var renderPoints = function (params) {
         coord = [d.X, d.Y];
         return projection(coord)[1]; 
       })
+
       .attr("r", "1px") 
       .attr("stroke", "red")
       .on("mouseover", function(d) {    
@@ -53,6 +56,7 @@ var renderPoints = function (params) {
 };
 
 var animatePoints = function() {
+
   console.log(svg);
   console.log(projection);
   svg.selectAll("circle")
@@ -74,6 +78,7 @@ var animatePoints = function() {
   .ease("cubic-in-out")
   .attr("r", "0px");
 };
+
 
 var render = function () {
   var width = .8 * window.innerWidth, height = .85 * window.innerHeight;

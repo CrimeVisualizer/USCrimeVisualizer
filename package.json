@@ -25,6 +25,8 @@
     "mongodb": "^2.0.43",
     "mongoose": "^4.1.8",
     "morgan": "~1.6.1",
+    "point-in-polygon": "^1.0.0",
+    "underscore": "^1.8.3"
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
