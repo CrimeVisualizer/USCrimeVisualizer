@@ -6,7 +6,7 @@ body, html {
 }
 
 #main {
-  min-height: 500px;
+  /*min-height: 500px;*/
 }
 
 
@@ -37,6 +37,7 @@ body, html {
 
 #sidebar {
   position: absolute;
+  min-height: 700px;
   height: 100%;
   width: 250px;
   padding-top: 30px;
@@ -203,13 +204,17 @@ path:hover {
   left: 40%;
 }
 
-#play, #pause {
+#play, 
+#pause,
+#speedup {
   text-decoration: none;
   color: white;
 
 }
 
-#play:hover, #pause:hover {
+#play:hover, 
+#pause:hover,
+#speedup:hover {
   color: rgba(30, 136, 229, 0.85);
 }
 

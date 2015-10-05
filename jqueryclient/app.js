@@ -76,10 +76,7 @@ var renderPoints = function (data, callback) {
           svg.selectAll('circle')
           .attr("r", "3px");
       });
-      // displays the district name on top of the map on hover 
-      $('svg path').hover(function() {
-        $("#district").text($(this).data("name"));
-      });
+    
       callback();
 };
 
@@ -141,6 +138,11 @@ var render = function () {
     return d.id;
   }).attr('data-name', function(d) {
     return d.properties.name;
+  });
+
+  // displays the district name on top of the map on hover 
+  $('svg path').hover(function() {
+    $("#district").text($(this).data("name"));
   });
 
   function zoomed () {
@@ -236,7 +238,7 @@ function tick (dtg) {
   if (play) {
     // if current date matches an event, render that event on screen
     if (window.data[now]) {
-      arr.concat(window.data[now])
+      // arr.concat(window.data[now])
       renderPoints(window.data[now], function () {
         setTimeout(function() {
           tick(now.getTime() + 60000)
@@ -263,9 +265,9 @@ getData(function (data) {
       window.data[dtg] = [data[i]];
     }
   }
-  render();
-  tick(day + currentTime);
-});
+}, "date=2009-09");
+render();
+tick(day + currentTime);
 
 // play button will also have an on click event
 // the callback should set play to the opposite of what it was and relaunch tick function
