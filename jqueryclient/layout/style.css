@@ -1,37 +1,48 @@
 body, html {
-  font-family: "Roboto", arial, sans-serif;
-  overflow-x: hidden; 
-  width: 100%;
   font-family: "Lato", arial, sans-serif;
-  background-color: #101010;
+  background-color: #212121;
   color: white;
+  overflow-x: hidden; 
 }
 
 #main {
   min-height: 500px;
-  margin-bottom: 150px;
 }
 
+
 #map {
-  float: right;
-  background-color: #101010;
-  padding: 50px;
   color: white;
-  text-align: center;
+  text-align: left;
+  /*margin-bottom: 150px;*/
+  margin-left: 10%;
 }
-#graph {
-  float: left;
-  background-color: white;
-  padding: 10px;
-  color: white;
-  text-align: center;
+
+#timeline button, 
+#categories button,
+#months button {
+  width: 7.65%;
+  /*width: 9%;*/
+  /*margin-left: 0;*/
+  background-color: black;
+  border: 1px solid #212121;
+
+}
+
+#timeline button:hover,
+#categories button:hover,
+#months button:hover {
+  background-color: rgba(30, 136, 229, 0.85);
 }
 
 
 #sidebar {
+  position: absolute;
+  height: 100%;
+  width: 250px;
+  padding-top: 30px;
   background-color: rgba(0, 0, 0, 0.19);
   /*height: 800px;*/
-  margin-top: 5%;
+  margin-top: 0;
   /*margin-left: 20px;*/
   
 }
@@ -42,6 +53,7 @@ body, html {
   /*margin-bottom: 40px;
   margin-left: 30px;
   margin-top: 10%;*/
+
   padding: 10px;
   border-radius: 2px;
 }
@@ -94,12 +106,11 @@ body, html {
   font-family: 'Fjalla One', sans-serif;
 }
 
-#city>svg {
+svg {
   margin: 20px;
   fill: rgba(31, 29, 29, 0);
-  stroke: rgba(255, 255, 255, 0.1);
+  stroke: rgba(255, 255, 255, 0.32);
 }
-
 
 svg circle {
   fill: rgba(11, 134, 224, 0.81);
@@ -142,14 +153,71 @@ path:hover {
 }
 
 .submit {
-  background-color: rgba(30, 136, 229, 0.85)
+  background-color: rgba(30, 136, 229, 0.85);
 }
 
 .submit:hover {
   background-color: rgba(30, 136, 229, 1)
 }
 
-button {
+#zoomButtons {
+  position: absolute;
+  /*text-align: right;*/
+  top: 2%;
+  right: 2%;
+}
+
+#zoomButtons button {
+  padding: 3px 15px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+  background-color: rgba(30, 136, 229, 0.85);
+  border: 1px solid grey;
+}
+
+#zoomButtons button:hover {
+  background-color: rgba(30, 136, 229, 1);
+}
+
+#zoomButtons ul li {
+  display: inline-block;
+}
+
+#overlay path,
+#overlay circle {
+  fill: #222;
+  stroke: #5f0;
+  stroke-opacity: 0;
+}
+
+#overlay .lit {
+  /*fill: #0e0;*/
+  fill: orange;
+  stroke-opacity: 1;
+}
+
+#clock {
+  width: 15%;
+  position: relative;
+  top: 2%;
+  left: 40%;
+}
+
+#play, #pause {
+  text-decoration: none;
+  color: white;
+
+}
+
+#play:hover, #pause:hover {
+  color: rgba(30, 136, 229, 0.85);
+}
+
+#pause {
+  display: none;
+}
+
+/*button {
   background-color: black;
   border: 2 px;
   border-color: rgba(255, 255, 255, 0.1);
@@ -160,17 +228,22 @@ button:hover {
 }
 button.active {
   background-color: rgba(255, 255, 255, 0.1);
+}*/
+
+#district {
+  height: 45px;
 }
+
 div.tooltip { 
     position: absolute;     
     text-align: center;     
-    width: 60px;          
-    height: 28px;         
-    padding: 2px;       
-    font: 5px sans-serif;    
-    background: red; 
+    /*width: 70px;          */
+ /*   height: 35px; */        
+    padding: 5px;       
+    font: 12px sans-serif;    
+    background: rgba(30, 136, 229, 0.92);
     border: 0px;    
-    border-radius: 8px;     
+    border-radius: 5px;     
     pointer-events: none;     
 }
 
