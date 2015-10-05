@@ -1,86 +1,95 @@
-window.data = {};
-
+var dataStorage = {};
 var arr = [];
 var projection, now;
 // have a global variable for current time
 // that variable is set to where the clock is currently at
-var currentTime = "00:00";
-var day = "Wednesday,09/09/2015,";
-var playbackSpeed = 200;
+var playbackSpeed = 50;
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
 
+var storeData = function (data) {
+  dataStorage = {};
+  for (var i = 0; i < data.length; i++) {
+    var dtg = new Date(data[i].Date + ',' + data[i].Time);
+    if (dataStorage[dtg]) {
+      dataStorage[dtg].push(data[i]);
+    } else { // in case there are multiple events at the same time, we will store them in an array
+      dataStorage[dtg] = [data[i]];
+    }
+  }
+  return data;
+}
 
 var getData = function (callback, params) {
   /* Makes ajax call to database with 
      the needed params. eg the start date from where to fetch crimes
   */
-  params = params || '';
+  console.log(params);
   $.get('/api/events/' + params , function (data) {
     callback(data);
   });
 };
 
 var renderPoints = function (data, callback) {
-      // renders points of crime on the map created by render() function call 
-      // this function gets called by an event in timeline.js
-      // depending on what timeperiod the user requested, this function will get called
-      // with different params 
-      var coord;
-      // add circles to svg
-      var svg = d3.select("#city").selectAll("svg");
-      // tooltip element is invisible by default
-      var tooltip = d3.select("body").append("div") 
-          .attr("class", "tooltip")       
-          .style("opacity", 0);
-      // add dots to svg
-      // this is where the magic happens 
-      // 'glues' the dots to the map
-      // d3 is smart enough to know where to put the dots based on lat and longitude
-      svg.selectAll("circle")
-      // .remove()
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", function (d) {
-        coord = [d.X, d.Y];
-        return projection(coord)[0]; 
-      })
-      .attr("cy", function (d) { 
-        coord = [d.X, d.Y];
-        return projection(coord)[1]; 
-      })
+  // renders points of crime on the map created by render() function call 
+  // this function gets called by an event in timeline.js
+  // depending on what timeperiod the user requested, this function will get called
+  // with different params 
+  var coord;
+  // add circles to svg
+  var svg = d3.select("#city").selectAll("svg");
+  // tooltip element is invisible by default
+  var tooltip = d3.select("body").append("div") 
+      .attr("class", "tooltip")       
+      .style("opacity", 0);
+  // add dots to svg
+  // this is where the magic happens 
+  // 'glues' the dots to the map
+  // d3 is smart enough to know where to put the dots based on lat and longitude
+  svg.selectAll("circle")
+  .remove()
+  .data(data).enter()
+  .append("circle")
+  .attr("cx", function (d) {
+    coord = [d.X, d.Y];
+    return projection(coord)[0]; 
+  })
+  .attr("cy", function (d) { 
+    coord = [d.X, d.Y];
+    return projection(coord)[1]; 
+  })
 
-      .attr("r", "3px")
-      // .transition()
-      // .delay(1500)
-      // .ease("cubic-in-out")
-      // .style("fill", "#eeeeee")
-      // .attr("r", "0px");
+  .attr("r", "3px")
+  // .transition()
+  // .delay(1500)
+  // .ease("cubic-in-out")
+  // .style("fill", "#eeeeee")
+  // .attr("r", "0px");
 
-      .on("mouseover", function(d) {
-          // render tooltip when hovering over a crime 
-          tooltip.transition()    
-             .duration(200)    
-             .style("opacity", .9);    
-          tooltip.html("<p>"+d.Category+"</p>" + "<p>"+ d.Address+"</p>")
+  .on("mouseover", function(d) {
+      // render tooltip when hovering over a crime 
+      tooltip.transition()    
+         .duration(200)    
+         .style("opacity", .9);    
+      tooltip.html("<p>"+d.Category+"</p>" + "<p>"+ d.Address+"</p>")
 
-            .style("left", (d3.event.pageX) + "px")   
-            .style("top", (d3.event.pageY - 28) + "px");
-          })          
-      .on("mouseout", function(d) {   
-          // make tooltip invisible when user stops hovering over dot  
-          tooltip.transition()    
-              .duration(500)    
-              .style("opacity", 0); 
-          svg.selectAll('circle')
-          .attr("r", "3px");
-      });
-      // displays the district name on top of the map on hover 
-      $('svg path').hover(function() {
-        $("#district").text($(this).data("name"));
-      });
-      callback();
+        .style("left", (d3.event.pageX) + "px")   
+        .style("top", (d3.event.pageY - 28) + "px");
+      })          
+  .on("mouseout", function(d) {   
+      // make tooltip invisible when user stops hovering over dot  
+      tooltip.transition()    
+          .duration(500)    
+          .style("opacity", 0); 
+      svg.selectAll('circle')
+      .attr("r", "3px");
+  });
+  // displays the district name on top of the map on hover 
+  $('svg path').hover(function() {
+    $("#district").text($(this).data("name"));
+  });
+  callback();
 };
 
 var animatePoints = function(svg) {
@@ -221,7 +230,7 @@ function tick (dtg) {
         hours = now.getHours(),
         minutes = now.getMinutes(),
         seconds = now.getSeconds();
-    
+    console.log(now)
 
     digit = digit.data([hours / 10 | 0, hours % 10, minutes / 10 | 0, minutes % 10, seconds / 10 | 0, seconds % 10]);
     digit.select("path:nth-child(1)").classed("lit", function(d) { return digitPattern[0][d]; });
@@ -235,9 +244,8 @@ function tick (dtg) {
 
   if (play) {
     // if current date matches an event, render that event on screen
-    if (window.data[now]) {
-      arr.concat(window.data[now])
-      renderPoints(window.data[now], function () {
+    if (dataStorage[now]) {
+      renderPoints(dataStorage[now], function () {
         setTimeout(function() {
           tick(now.getTime() + 60000)
         }, playbackSpeed); // animate the clock at speed of playbackSpeed
@@ -252,20 +260,12 @@ function tick (dtg) {
 }
 
 
-getData(function (data) {
-  // save results of data in window for fast lookup by date time group
-  data = JSON.parse(data);
-  for (var i = 0; i < data.length; i++) {
-    var dtg = new Date(day + data[i].Time);
-    if (window.data[dtg]) {
-      window.data[dtg].push(data[i]);
-    } else { // in case there are multiple events at the same time, we will store them in an array
-      window.data[dtg] = [data[i]];
-    }
-  }
-  render();
-  tick(day + currentTime);
-});
+// getData(function (data) {
+//   // save results of data in window for fast lookup by date time group
+//   data = JSON.parse(data);
+//   render();
+//   tick(day + currentTime);
+// });
 
 // play button will also have an on click event
 // the callback should set play to the opposite of what it was and relaunch tick function
@@ -278,3 +278,4 @@ d3.selectAll("#play, #pause").on("click", function () {
   tick(now);
 });
 
+render();

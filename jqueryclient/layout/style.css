@@ -252,6 +252,7 @@ div.tooltip {
     border-radius: 5px;     
     pointer-events: none;     
 }
+
 #graph>.axis path,
 #graph>.axis line {
   fill: none;
@@ -268,6 +269,7 @@ div.tooltip {
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+
 .overlay {
   fill: none;
   pointer-events: all;
@@ -276,4 +278,10 @@ div.tooltip {
 .focus circle {
   fill: none;
   stroke: steelblue;
+}
+
+#category {
+  display:block;
+  position: relative;
+  margin-top: 40px;
 }
