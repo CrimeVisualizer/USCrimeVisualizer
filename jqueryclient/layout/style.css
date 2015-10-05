@@ -16,7 +16,13 @@ body, html {
   /*margin-bottom: 150px;*/
   margin-left: 10%;
 }
-
+#graph {
+  float: left;
+  background-color: white;
+  padding: 10px;
+  background-color: #101010;
+  text-align: center;
+}
 #timeline button, 
 #categories button,
 #months button {
@@ -246,4 +252,28 @@ div.tooltip {
     border-radius: 5px;     
     pointer-events: none;     
 }
+#graph>.axis path,
+#graph>.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
 
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}

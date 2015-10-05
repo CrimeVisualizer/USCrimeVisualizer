@@ -5,7 +5,7 @@ var connection = require('../connection')
 router.get('/', function (req, res, next) {
   // query DB for everything
   connection(function (db) {
-    db.collection('summarized_month').find({}).toArray(function (err, results) {
+    db.collection('summarized_month').find({}).limit(139).toArray(function (err, results) {
       res.send(JSON.stringify(results));
     });
   });
