@@ -16,6 +16,7 @@
           <div class="row">
             <div class="col s12">
               <h5>San Francisco</h5>
+              <div id="district">District</div>
               <a id="play"><i class="small material-icons">play_circle_outline</i></a>
               <a id="pause"><i class="small material-icons">pause_circle_outline</i></a>
               <form name="filterData">
@@ -41,7 +42,7 @@
               <p>Sample text here</p>
             </div>
           </div>
-        </div>
+      </div>
     
     <div id="map">
       <!-- <h5>A Neighborhood Map of San Francisco</h5> -->
@@ -88,6 +89,7 @@
               <path d="M228,50L232,54L232,82L228,86L224,82L224,54L228,50z"/>
               <path d="M190,88L194,84L222,84L226,88L222,92L194,92L190,88z"/>
             </g>
+            <!-- Seconds on the clock are commented out since we're not currently displaying them -->
     <!--         <g class="separator">
               <circle r="4" cx="236" cy="28"/>
               <circle r="4" cx="227.5" cy="68"/>
@@ -113,6 +115,7 @@
           </g>
         </svg>
       </div>
+
       <div id="city">
         <div id="zoomButtons">
           <ul>
@@ -120,21 +123,27 @@
           <li><button id="zoom_out" class="zoom">-</button></li>
           </ul>
         </div>
-        
       </div>
-      
+
     </div>
-    <div id="timeline"></div>
-    <div id="months"></div>
-  </div>
+
+    
+      <div id="categories"></div>
+      <div id="timeline"></div>
+      <div id="months"></div>
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
   <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
 
   <script src="map/map.js"></script>
+  <script src="timeline.js"></script>
+  <script src="categories.js"></script>
+  <script src="heatmap.js"></script>
   <script src="app.js"></script>
-  <script src="slider.js"></script>
+
+
   
 </body>
 </html>

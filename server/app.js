@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var events = require('./routes/events');
 var graphs = require('./routes/graphs');
 var app = express();
@@ -22,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../jqueryclient')));
 // app.use(express.static(path.join(__dirname, '../client')));
 
-app.use('/', routes);
+
 app.use('/api/events', events);
 // app.use('/api/graphs', graphs);
 // app.use('/users', users);
@@ -34,7 +32,6 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace
