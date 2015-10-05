@@ -5,11 +5,13 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "start": "gulp",
-    "lint": "jscs ./"
+    "lint": "jscs ./",
+    "postinstall": "bower install"
   },
   "pre-commit": "lint",
   "dependencies": {
     "body-parser": "~1.13.2",
+    "browser-sync": "^1.5.7",
     "chai": "^3.3.0",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
@@ -37,18 +39,25 @@
     "gulp-karma": "0.0.4",
     "gulp-nodemon": "^1.0.4",
     "gulp-shell": "^0.2.7",
+    "jade": "~1.11.0",
+    "jscs": "^2.1.1",
+    "jshint-stylish": "^2.0.1",
     "karma": "^0.13.10",
-    "karma-nyan-reporter": "0.0.43",
-    "karma-unicorn-reporter": "^0.1.4",
     "karma-chrome-launcher": "^0.1.4",
     "karma-cli": "0.0.4",
     "karma-jasmine": "^0.1.5",
     "karma-mocha": "^0.1.4",
     "karma-nested-reporter": "^0.1.1",
+    "karma-nyan-reporter": "0.0.43",
     "karma-phantomjs-launcher": "^0.1.4",
-    "jscs": "^2.1.1",
-    "jshint-stylish": "^2.0.1",
+    "karma-unicorn-reporter": "^0.1.4",
+    "mocha": "^2.3.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.0.43",
+    "morgan": "~1.6.1",
     "pre-commit": "^1.1.1",
+    "serve-favicon": "~2.3.0",
     "supertest": "^1.1.0"
-  }
+  },
+  "devDependencies": {}
 }
