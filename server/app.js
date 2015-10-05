@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../jqueryclient')));
 
 
 app.use('/api/events', events);
-// app.use('/api/graphs', graphs);
+app.use('/api/graphs', graphs);
 // app.use('/users', users);
 
 // catch 404 and forward to error handler

@@ -236,7 +236,7 @@ function tick (dtg) {
   if (play) {
     // if current date matches an event, render that event on screen
     if (window.data[now]) {
-      // arr.concat(window.data[now]);
+      arr.concat(window.data[now])
       renderPoints(window.data[now], function () {
         setTimeout(function() {
           tick(now.getTime() + 60000)
