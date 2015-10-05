@@ -90,17 +90,24 @@ var renderHeatMap = function () {
 // Animate by month
 // Animate by day of the week
 
+//key constants 
+var anim_start_day = ?
+var end_day = ?
+var start_delay = 1000;
+var time_conversion;
+
 // Function that iterates through the crime data per day per zip code
 var year = anim_start_day;
-var update_map function (trans, year) {
-  year++;
-  if (year <= end_year) { 
+
+var update_map = function (trans, day) {
+  day++;
+  if (day <= end_day) { 
     trans.transition()
-      .duration(time_conversion)
-      .delay(start_delay+(year-anim_start_year)*time_conversion) 
+      .duration( ? )
+      .delay(start_delay + (year - anim_start_year) * time_conversion) 
       .attr('fill',function()  { return polygon_color(this,year); }) 
       .ease('linear')
-    .call(update_map,year);
+    .call(update_map, year);
   }
 };
 
@@ -109,6 +116,7 @@ var animateHeatMap = function() {
   svg.selectAll("path")
   .transition(500)
   .delay(function(d) {
+
 
     d.Date.split("/")
     return (date[0] );
