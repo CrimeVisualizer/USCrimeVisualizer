@@ -1,4 +1,3 @@
-
 var getData = function (callback) {
   $.get('/api/events/' , function (data) {
     // console.log(params);
@@ -30,9 +29,8 @@ var getMaxMin = function (data) {
 // };
 
 // // Renders Heat Map - this is rendered in place of standard map
-// var renderHeatMap = function () {
+var renderHeatMap = function () {
 
-<<<<<<< HEAD
   // getData(function (data) {
   //     var coord;
 
@@ -94,25 +92,25 @@ var getMaxMin = function (data) {
 // Animate by day of the week
 
 //key constants 
-var anim_start_day = ?
-var end_day = ?
+// var anim_start_day = ?
+// var end_day = ?
 var start_delay = 1000;
 var time_conversion;
 
 // Function that iterates through the crime data per day per zip code
-var year = anim_start_day;
+// var year = anim_start_day;
 
-var update_map = function (trans, day) {
-  day++;
-  if (day <= end_day) { 
-    trans.transition()
-      .duration( ? )
-      .delay(start_delay + (year - anim_start_year) * time_conversion) 
-      .attr('fill',function()  { return polygon_color(this,year); }) 
-      .ease('linear')
-    .call(update_map, year);
-  }
-};
+// var update_map = function (trans, day) {
+//   day++;
+//   if (day <= end_day) { 
+//     trans.transition()
+//       .duration( ? )
+//       .delay(start_delay + (year - anim_start_year) * time_conversion) 
+//       .attr('fill',function()  { return polygon_color(this,year); }) 
+//       .ease('linear')
+//     .call(update_map, year);
+//   }
+// };
 
 // Animate by day 
 var animateHeatMap = function() {
@@ -137,4 +135,4 @@ var animateHeatMap = function() {
   .attr("r", "0px");
 };
 
-renderHeatMap();
+// renderHeatMap();

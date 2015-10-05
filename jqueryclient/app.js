@@ -133,9 +133,6 @@ var render = function () {
   });
 };
 
-
-
-render();
-renderPoints();
+// renderPoints();
 // animatePoints();
 
