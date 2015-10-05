@@ -4,10 +4,11 @@ var projection, now;
 // have a global variable for current time
 // that variable is set to where the clock is currently at
 var currentTime = "00:00";
+var day = "Wednesday,09/09/2015,";
+var playbackSpeed = 1000;
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
-
 
 
 
@@ -20,9 +21,7 @@ var getData = function (callback) {
 
 var renderPoints = function (data, callback) {
       var coord;
-
       // add circles to svg
-      // data = JSON.parse(data);
       var svg = d3.select("#city").selectAll("svg");
       svg.selectAll("circle").remove()
       .data(data).enter()
@@ -198,21 +197,16 @@ function tick (dtg) {
       renderPoints(window.data[now], function () {
         setTimeout(function() {
           tick(now.getTime() + 60000)
-        }, 1000);
+        }, playbackSpeed); // animate the clock at speed of playbackSpeed
       });
 
     } else {
       setTimeout(function() {
         tick(now.getTime() + 60000)
-      }, 1000);
-      // tick(now.getTime() + 60000);
+      }, playbackSpeed);
     }
-    // animate the clock so that every 1000 ms is a minute
   }
 }
-
-var day = "Wednesday,09/09/2015,";
-
 
 
 getData(function (data) {

@@ -158,6 +158,10 @@ path:hover {
   border: 1px solid grey;
 }
 
+#zoomButtons button:hover {
+  background-color: rgba(30, 136, 229, 1);
+}
+
 #zoomButtons ul li {
   display: inline-block;
 }
