@@ -20,6 +20,7 @@ var renderPoints = function (params) {
   getData(function (data) {
       // data is a in JSON format
       // data contains the crimes in the timeperiod specified in params
+      console.log(data);
       var coord;
 
       // tooltip element is invisible by default

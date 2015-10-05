@@ -19,7 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
     "d3": "~3.5.6",
     "Materialize": "materialize#~0.97.1",
     "jquery": "~2.1.4"
