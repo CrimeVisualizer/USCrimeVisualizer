@@ -1,5 +1,7 @@
 var svg, projection;
 
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+    console.log(parseDate);
 
 var getData = function (callback) {
   $.get('/api/events/', function (data) {
@@ -12,7 +14,6 @@ var getData = function (callback) {
 var renderPoints = function (params) {
   getData(function (data) {
       var coord;
-
       var div = d3.select("body").append("div") 
           .attr("class", "tooltip")       
           .style("opacity", 0);
@@ -57,8 +58,8 @@ var renderPoints = function (params) {
 
 var animatePoints = function() {
 
-  console.log(svg);
-  console.log(projection);
+  // console.log(svg);
+  // console.log(projection);
   svg.selectAll("circle")
   // .attr("r", "0px")
   .attr("stroke", "red")
@@ -109,6 +110,6 @@ var render = function () {
 
 
 render();
-// renderPoints();
+renderPoints();
 animatePoints();
 

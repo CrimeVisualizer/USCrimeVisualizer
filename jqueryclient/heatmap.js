@@ -90,16 +90,28 @@ var renderHeatMap = function () {
 // Animate by month
 // Animate by day of the week
 
+// Function that iterates through the crime data per day per zip code
+var year = anim_start_day;
+var update_map function (trans, year) {
+  year++;
+  if (year <= end_year) { 
+    trans.transition()
+      .duration(time_conversion)
+      .delay(start_delay+(year-anim_start_year)*time_conversion) 
+      .attr('fill',function()  { return polygon_color(this,year); }) 
+      .ease('linear')
+    .call(update_map,year);
+  }
+};
+
 // Animate by day 
 var animateHeatMap = function() {
   svg.selectAll("path")
   .transition(500)
   .delay(function(d) {
 
-    // 09/09/2015
-
-    var date = d.Date.split("/")
-    return (date[0]);
+    d.Date.split("/")
+    return (date[0] );
 
   })
   .ease("cubic-in-out")
