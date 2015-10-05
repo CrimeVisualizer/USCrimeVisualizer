@@ -1,0 +1,129 @@
+html {
+  width: 100%;
+}
+
+body {
+  font-family: "Lato", arial, sans-serif;
+  background-color: #212121;
+  color: white;
+}
+
+#main {
+  min-height: 500px;
+  margin-bottom: 0px;
+}
+
+#map {
+
+  color: white;
+  text-align: center;
+}
+
+
+#sidebar {
+  background-color: rgba(0, 0, 0, 0.19);
+  /*height: 800px;*/
+  margin-top: 5%;
+  /*margin-left: 20px;*/
+  
+}
+
+#sidebar form {
+  /*background-color: #fcfcfc;*/
+  /*background-color: rgba(200,200,200,0.09);*/
+  /*margin-bottom: 40px;
+  margin-left: 30px;
+  margin-top: 10%;*/
+  padding: 10px;
+  border-radius: 2px;
+}
+
+#neighborhood {
+  margin-left: -20px;
+}
+
+#browse {
+  margin-left: 130px;
+}
+
+#banner a {
+  background-color: #1565c0;
+}
+
+#bannerBox {
+  position: absolute;
+  border-radius: 3px;
+  height: 180px;
+  width: 300px;
+  margin-top: 80px;
+  margin-left: 50px;
+  padding: 100, 10;
+  color: white;
+  background-color: rgba(0,0,0,0.6);
+
+}
+
+#bannerBox h3 a{
+  color: white;
+  text-align: center;
+}
+
+
+#bannerFoot {
+  /*position: absolute;*/
+  width: 100%;
+  /*margin-top: -10px;*/
+  bottom: 0;
+  background-color: rgba(6, 4, 4, 0.6);
+  padding: 0 20px;
+}
+
+#d3Map {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+svg {
+  margin: 20px;
+  fill: rgba(31, 29, 29, 0);
+  stroke: rgba(255, 255, 255, 0.32);
+}
+
+svg circle {
+  fill: rgba(11, 134, 224, 0.81);
+}
+
+path {
+  fill: #101010;
+}
+
+path:hover {
+  opacity: 0.6;
+  fill: rgba(11, 31, 74, 0.84);
+  stroke: #ffffff;
+}
+
+.headerbar {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navColor {
+  background-color: rgba(30, 136, 229, 0.58);
+  margin-bottom: 40px;
+  z-index: 100;
+}
+
+.brand-icon {
+  margin-right: 10px;
+}
+
+.submit {
+  background-color: rgba(30, 136, 229, 0.85)
+}
+
+.submit:hover {
+  background-color: rgba(30, 136, 229, 1)
+}
