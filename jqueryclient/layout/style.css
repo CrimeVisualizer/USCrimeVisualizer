@@ -3,7 +3,7 @@ body, html {
   overflow-x: hidden; 
   width: 100%;
   font-family: "Lato", arial, sans-serif;
-  background-color: #212121;
+  background-color: #101010;
   color: white;
 }
 
@@ -13,8 +13,16 @@ body, html {
 }
 
 #map {
+  float: right;
   background-color: #101010;
   padding: 50px;
+  color: white;
+  text-align: center;
+}
+#graph {
+  float: left;
+  background-color: white;
+  padding: 10px;
   color: white;
   text-align: center;
 }
@@ -86,11 +94,12 @@ body, html {
   font-family: 'Fjalla One', sans-serif;
 }
 
-svg {
+#city>svg {
   margin: 20px;
   fill: rgba(31, 29, 29, 0);
   stroke: rgba(255, 255, 255, 0.1);
 }
+
 
 svg circle {
   fill: rgba(11, 134, 224, 0.81);
@@ -164,3 +173,33 @@ div.tooltip {
     border-radius: 8px;     
     pointer-events: none;     
 }
+<<<<<<< HEAD
+
+#graph>.axis path,
+#graph>.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+=======
+>>>>>>> 71b9bd1087810400078ef3f09868012de0add44c

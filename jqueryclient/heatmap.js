@@ -1,3 +1,4 @@
+
 var getData = function (callback) {
   $.get('/api/events/' , function (data) {
     // console.log(params);
@@ -21,16 +22,17 @@ var getMaxMin = function (data) {
 };
 
 
-// Sum each zipcode count by each record
-var getZipcodeCount = function (data) {
-  return _.countBy(data, function(record) {
-    return record['zipcode'];
-  });
-};
+// // Sum each zipcode count by each record
+// var getZipcodeCount = function (data) {
+//   return _.countBy(data, function(record) {
+//     return record['zipcode'];
+//   });
+// };
 
-// Renders Heat Map - this is rendered in place of standard map
-var renderHeatMap = function () {
+// // Renders Heat Map - this is rendered in place of standard map
+// var renderHeatMap = function () {
 
+<<<<<<< HEAD
   // getData(function (data) {
   //     var coord;
 
@@ -69,15 +71,16 @@ var renderHeatMap = function () {
   '94134': 71 
   }
 
-    var maxMinArray = getMaxMin(aggregate);
+//     var maxMinArray = getMaxMin(aggregate);
 
-  // Generates a range of 9 values within the provided domain.
-  // Function used to generated CSS class values, 0-8.
-  // Values correspond to a range of blues in CSS file (see CSS file)
-  var quantize = d3.scale.quantize()
-      .domain(maxMinArray)
-      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+//   // Generates a range of 9 values within the provided domain.
+//   // Function used to generated CSS class values, 0-8.
+//   // Values correspond to a range of blues in CSS file (see CSS file)
+//   var quantize = d3.scale.quantize()
+//       .domain(maxMinArray)
+//       .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
         
+
       // Render the heat map
       svg.selectAll("path")
           .attr("class", function(d) {

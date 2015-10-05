@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var events = require('./routes/events');
 var graphs = require('./routes/graphs');
 var app = express();
@@ -24,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../jqueryclient')));
 
 
 app.use('/api/events', events);
-// app.use('/api/graphs', graphs);
+app.use('/api/graphs', graphs);
 // app.use('/users', users);
 
 // catch 404 and forward to error handler
