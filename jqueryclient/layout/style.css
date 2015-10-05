@@ -173,7 +173,6 @@ div.tooltip {
     border-radius: 8px;     
     pointer-events: none;     
 }
-<<<<<<< HEAD
 
 #graph>.axis path,
 #graph>.axis line {
@@ -201,5 +200,9 @@ div.tooltip {
   fill: none;
   stroke: steelblue;
 }
-=======
->>>>>>> 71b9bd1087810400078ef3f09868012de0add44c
+
+#category {
+  display:block;
+  position: relative;
+  margin-top: 40px;
+}

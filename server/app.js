@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var events = require('./routes/events');
 var graphs = require('./routes/graphs');
+var categories = require('./routes/categories');
 var app = express();
 
 // uncomment after placing  your favicon in /public
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, '../jqueryclient')));
 
 app.use('/api/events', events);
 app.use('/api/graphs', graphs);
+app.use('/api/categories', categories);
 // app.use('/users', users);
 
 // catch 404 and forward to error handler

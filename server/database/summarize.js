@@ -4,9 +4,7 @@ var summarizeCategoryMonth = function () {
   connection(function (db) {
     db.collection('allCrimes').aggregate([
       { $group: {
-        _id: { Category: "$Category",
-        Year: { $substr: ["$Date", 6, 4] },
-        Month: { $substr: ["$Date", 0, 2] }
+        _id: { Date: { $concat: [ {$substr: ["$Date", 6, 4] }, '-', { $substr: ["$Date", 0, 2]} ]
       }, 
         count: { $sum: 1 }
       }}, 

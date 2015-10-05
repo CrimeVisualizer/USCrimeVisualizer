@@ -129,7 +129,3 @@ var render = function () {
     return d.properties.name;
   });
 };
-
-
-// render();
-// renderPoints();

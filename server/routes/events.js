@@ -8,8 +8,7 @@ router.get('/', function (req, res, next) {
   // query DB for everything
   // will return you all the events in the database
   connection(function (db) {
-
-    db.collection('allCrimes').find().toArray(function(err, results) {
+    db.collection('allCrimes').find().toArray(function (err, results) {
       res.send(JSON.stringify(results));
     });
   });

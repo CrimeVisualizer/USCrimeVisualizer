@@ -82,7 +82,7 @@ var graphs = function (data) {
       d1 = data[i],
       d = x0 - d0.date > d1.date - x0 ? d1 : d0;
     focus.attr("transform", "translate(" + x(d.Date) + "," + y(d.count) + ")");
-    focus.select("text").text( d.count + ' crimes happened in '+parseDate(d.Date));
+    focus.select("text").text(parseDate(d.Date));
   };
 
   var click = function () {
