@@ -6,6 +6,10 @@ var graphs = function (data) {
   // Parse the date / time
   var parseDate = d3.time.format("%Y-%m");
 
+//   // Set the ranges
+  var x = d3.time.scale().range([0, width]);
+  var y = d3.scale.linear().range([height, 0]);
+
   // Define the axes
   var xAxis = d3.svg.axis().scale(x)
   .orient("bottom").ticks(10);

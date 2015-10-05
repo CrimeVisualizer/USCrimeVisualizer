@@ -20,7 +20,6 @@ var renderPoints = function (params) {
   getData(function (data) {
       // data is a in JSON format
       // data contains the crimes in the timeperiod specified in params
-      console.log(data);
       var coord;
 
       // tooltip element is invisible by default
@@ -62,14 +61,14 @@ var renderPoints = function (params) {
               .duration(500)    
               .style("opacity", 0); 
           svg.selectAll('circle')
-          .attr("r", "1px");
+          // .attr("r", "1px");
       });
       // displays the district name on top of the map on hover 
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
       // uncomment the below line if you want to animate the points over time
-      // animatePoints();
+      animatePoints();
   }, params);
 };
 
@@ -77,7 +76,7 @@ var animatePoints = function() {
 
   // set all the crime dots to invisible
   svg.selectAll("circle")
-  // .attr("r", "0px")
+  .attr("r", "0px")
   .attr("stroke", "red")
   // they will take 500 ms to appear
   .transition(500)
@@ -132,5 +131,5 @@ var render = function () {
 };
 
 
-render();
+// render();
 // renderPoints();
