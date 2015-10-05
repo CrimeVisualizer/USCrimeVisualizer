@@ -95,7 +95,12 @@ var graphs = function (data) {
       d0 = data[i - 1],
       d1 = data[i],
       d = x0 - d0 > d1 - x0 ? d1 : d0;
-    renderPoints('date=' + parseDate(d.Date));
+    getData(function (data) {
+      data = JSON.parse(data);
+      var date = new Date(d.Date);
+      storeData(data);
+      tick(date);
+    }, 'date=' + parseDate(d.Date));
   };
   svg.append("rect")
     .attr("class", "overlay")

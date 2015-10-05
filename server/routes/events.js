@@ -4,15 +4,15 @@ var connection = require('../connection')
 var fs = require('fs');
 
 /* GET Crimes through api/events */
-router.get('/', function (req, res, next) {
-  // query DB for everything
-  // will return you all the events in the database
-  connection(function (db) {
-    db.collection('allCrimes').find().toArray(function (err, results) {
-      res.send(JSON.stringify(results));
-    });
-  });
-});
+// router.get('/', function (req, res, next) {
+//   // query DB for everything
+//   // will return you all the events in the database
+//   connection(function (db) {
+//     db.collection('allCrimes').find().toArray(function (err, results) {
+//       res.send(JSON.stringify(results));
+//     });
+//   });
+// });
 
 router.get('/date=:date', function (req, res, next) {
   // data is an object with year and month as variables
