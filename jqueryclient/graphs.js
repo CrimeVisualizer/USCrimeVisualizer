@@ -5,6 +5,7 @@ var graphs = function (data) {
 
   // Parse the date / time
   var parseDate = d3.time.format("%Y-%m");
+  var parseFullDate = d3.time.format("%B of %Y")
 
 //   // Set the ranges
   var x = d3.time.scale().range([0, width]);
@@ -19,7 +20,7 @@ var graphs = function (data) {
 
   // Define the line
   var valueline = d3.svg.line()
-  // .interpolate("basis")
+  .interpolate("cardinal")
   .x(function(d) { return x(d.Date); })
   .y(function(d) { return y(d.count); });
   
@@ -53,11 +54,13 @@ var graphs = function (data) {
   // Add the X Axis
   svg.append("g")
   .attr("class", "x axis")
+  .attr("fill", "#8A9194")
   .attr("transform", "translate(0," + height + ")")
   .call(xAxis);
 
   // Add the Y Axis
   svg.append("g")
+  .attr("fill", "#8A9194")
   .attr("class", "y axis")
   .call(yAxis);
 
@@ -73,16 +76,17 @@ var graphs = function (data) {
 
   focus.append("text")
     .attr("x", 9)
-    .attr("dy", ".35em");
+    .attr("dy", ".35em")
+    .attr("fill", "#8A9194")
 
   var mousemove = function () {
     var x0 = x.invert(d3.mouse(this)[0]),
       i = bisectDate(data, x0, 1),
       d0 = data[i - 1],
       d1 = data[i],
-      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+      d = x0 - d0 > d1 - x0 ? d1 : d0;
     focus.attr("transform", "translate(" + x(d.Date) + "," + y(d.count) + ")");
-    focus.select("text").text(parseDate(d.Date));
+    focus.select("text").text( d.count + ' crimes committed in '+ parseFullDate(d.Date));
   };
 
   var click = function () {
@@ -90,10 +94,9 @@ var graphs = function (data) {
       i = bisectDate(data, x0, 1),
       d0 = data[i - 1],
       d1 = data[i],
-      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+      d = x0 - d0 > d1 - x0 ? d1 : d0;
     renderPoints('date=' + parseDate(d.Date));
   };
-
   svg.append("rect")
     .attr("class", "overlay")
     .attr("width", width)
