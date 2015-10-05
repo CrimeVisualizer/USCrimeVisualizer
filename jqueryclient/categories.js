@@ -3,14 +3,14 @@ var makeCategories = function (data) {
   var categories = {};
   data.forEach(function (d) {
     d.category = d._id.Category;
-    categories[d.category] = d.category;
+    categories[d.category] = d.count;
     d.date = d._id.Date;
   });
 
 
   // make buttons for every crime category
-  _.each(categories, function (value) {
-    $("#categories").append("<dd class=\"category\">" + value + "</dd>");
+  _.each(categories, function (value, key) {
+    $(".categories").append("<dd class=\"category\">" + key + " " + value + "</dd>");
   });
   // on hover display only those crimes within that category
   $(".category").mouseenter(function () {
@@ -28,6 +28,3 @@ var makeCategories = function (data) {
     .attr("r", "1px");
   });
 };
-$.get('api/categories', function (data) {
-  makeCategories(JSON.parse(data));
-})
