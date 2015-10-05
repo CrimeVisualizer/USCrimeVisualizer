@@ -21,6 +21,18 @@
     "grunt-mocha-test": "^0.12.7",
     "grunt-nodemon": "^0.4.0",
     "grunt-shell": "^1.1.2",
+    "jade": "~1.11.0",
+    "mocha": "^2.3.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.0.43",
+    "mongoose": "^4.1.8",
+    "morgan": "~1.6.1",
+    "point-in-polygon": "^1.0.0",
+    "underscore": "^1.8.3",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.5.7",
     "gulp": "^3.8.5",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.6.3",
