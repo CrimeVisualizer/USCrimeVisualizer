@@ -1,6 +1,6 @@
 var makeCategories = function (data) {
-
   var categories = {};
+  console.log(data)
   data.forEach(function (d) {
     d.category = d._id.Category;
     categories[d.category] = d.count;
