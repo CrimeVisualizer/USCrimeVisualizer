@@ -1,17 +1,15 @@
 window.data = {};
 
 var projection, now;
-var currentTime = "00:00";
-var play = false;
-
 // have a global variable for current time
-
 // that variable is set to where the clock is currently at
-
+var currentTime = "00:00";
 // another global variable play is set to false initially
 // when true, the animation will play
-// play button has a on click event
-// the callback should set play to true and relaunch tick function
+var play = false;
+
+
+
 
 var getData = function (callback) {
   $.get('/api/events', function (data) {
@@ -19,31 +17,6 @@ var getData = function (callback) {
   });
 };
 
-// var renderPoints = function (svg, projection) {
-//   // getData();
-//   function (data) {
-//       var coord;
-//       // add circles to svg
-//       data = JSON.parse(data);
-//       svg.selectAll("circle")
-//       .data(data).enter()
-//       .append("circle")
-//       .attr("cx", function (d) {
-//         coord = [d.X, d.Y];
-//         return projection(coord)[0]; 
-//       })
-//       .attr("cy", function (d) { 
-//         coord = [d.X, d.Y];
-//         return projection(coord)[1]; 
-//       })
-//       .attr("r", "2px");
-
-//       $('svg path').hover(function() {
-//         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
-//       });
-//       // animatePoints(svg);
-//   }
-// };
 
 var renderPoints = function (data, callback) {
       var coord;
@@ -183,9 +156,7 @@ var render = function () {
 };
 
 // Set up clock on the screen
-
 var svgOverlay = d3.select("#clockBoard");
-
 var svg = d3.selectAll("#clock");
 
 
@@ -247,9 +218,8 @@ var day = "Wednesday,09/09/2015,";
 getData(function (data) {
   // save results of data in window for fast lookup by date time group
   data = JSON.parse(data);
-  // debugger;
   for (var i = 0; i < data.length; i++) {
-    // debugger;
+
     var dtg = new Date(day + data[i].Time);
     if (window.data[dtg]) {
       window.data[dtg].push(data[i]);
@@ -261,8 +231,13 @@ getData(function (data) {
   tick(day + currentTime);
 });
 
-d3.select("#play").on("click", function () {
-  // debugger;
+// play button will also have an on click event
+// the callback should set play to the opposite of what it was and relaunch tick function
+d3.selectAll("#play, #pause").on("click", function () {
+  // switch from showing play or pause button
+  $("#play").toggle();
+  $("#pause").toggle();
+  // if play is false, pressing play will set it to true, and vice versa
   play = !play;
   tick(now);
 });
