@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   // query DB for everything
   connection(function (db) {
 
-    db.collection('crimes').find().toArray(function(err, results) {
+    db.collection('allCrimes').find().toArray(function(err, results) {
       res.send(JSON.stringify(results));
     });
   });
@@ -22,13 +22,11 @@ router.get('/date=:date', function (req, res, next) {
     rollover = 1;
   }
   var search = [
-    { Date: new RegExp('.*' + month + '\/.*\/' + year)},
-    { Date: new RegExp('.*' + (month + 1)%12 + '\/.*\/' + (+year+rollover))},
-    { Date: new RegExp('.*' + (month + 2)%12 + '\/.*\/' + (+year+rollover))}
+    { Date: new RegExp('.*' + month + '\/.*\/' + year)}
   ]
 
   connection(function (db) {
-    db.collection('allCrimes').find({$or: search}).toArray(function(err, results) {
+    db.collection('allCrimes').find({$or: search}).toArray(function (err, results) {
       res.send(JSON.stringify(results));
     });
   });

@@ -48,7 +48,7 @@ var renderPoints = function (params) {
       $('svg path').hover(function() {
         $("#details").text($(this).data("id") + " : " + $(this).data("name"));
       });
-      // animatePoints();
+      animatePoints();
   }, params);
 };
 
