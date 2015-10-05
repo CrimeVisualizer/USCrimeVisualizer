@@ -23,7 +23,7 @@ body, html {
   float: left;
   background-color: white;
   padding: 10px;
-  color: white;
+  background-color: #101010;
   text-align: center;
 }
 
@@ -173,8 +173,6 @@ div.tooltip {
     border-radius: 8px;     
     pointer-events: none;     
 }
-<<<<<<< HEAD
-
 #graph>.axis path,
 #graph>.axis line {
   fill: none;
@@ -191,7 +189,6 @@ div.tooltip {
   stroke: steelblue;
   stroke-width: 1.5px;
 }
-
 .overlay {
   fill: none;
   pointer-events: all;
@@ -201,5 +198,3 @@ div.tooltip {
   fill: none;
   stroke: steelblue;
 }
-=======
->>>>>>> 71b9bd1087810400078ef3f09868012de0add44c
