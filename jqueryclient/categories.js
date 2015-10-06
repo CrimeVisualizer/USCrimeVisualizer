@@ -18,7 +18,7 @@ var makeCategories = function (data) {
     $(".categories").append("<dd class=\"category\">" + value[0] + " " + value[1] + "</dd>");
   });
   // on hover display only those crimes within that category
-    var svg = d3.select("#city").selectAll("svg");
+    var svg = d3.select("#map").selectAll("svg");
   $(".category").mouseenter(function () {
     var category = $(this).text().split(" ")[0];
     svg.selectAll("circle")

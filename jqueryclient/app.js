@@ -40,7 +40,7 @@ var renderPoints = function (data, callback) {
   // with different params 
   var coord;
   // add circles to svg
-  var svg = d3.select("#city").selectAll("svg");
+  var svg = d3.select("#map").selectAll("svg");
   // tooltip element is invisible by default
   var tooltip = d3.select("body").append("div") 
       .attr("class", "tooltip")       
@@ -87,10 +87,7 @@ var renderPoints = function (data, callback) {
       svg.selectAll('circle')
       .attr("r", "3px");
   });
-  // displays the district name on top of the map on hover 
-  $('svg path').hover(function() {
-    $("#district").text($(this).data("name"));
-  });
+
   callback();
 };
 
@@ -127,7 +124,7 @@ var render = function () {
   var width = .9 * window.innerWidth, height = .9 * window.innerHeight;
   var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
   // Creates the map svg
-  var svg = d3.select('#city').append("svg").attr("width", width).attr("height", height)
+  var svg = d3.select('#map').append("svg").attr("width", width).attr("height", height)
     .append("g")
     .call(zoom)
     .append("g");
@@ -152,6 +149,11 @@ var render = function () {
     return d.id;
   }).attr('data-name', function(d) {
     return d.properties.name;
+  });
+
+  // displays the district name on top of the map on hover 
+  $('svg path').hover(function() {
+    $("#district").text($(this).data("name"));
   });
 
   function zoomed () {

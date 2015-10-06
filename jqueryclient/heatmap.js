@@ -5,7 +5,7 @@ d3.selectAll("#heatmap").on("click", function () {
   if(heatmap) {
     console.log('turning off')
     // toggle heatmap off
-    var svg = d3.select("#city").selectAll("svg");
+    var svg = d3.select("#map").selectAll("svg");
     svg.selectAll("path")
           .attr("class", 'qOff')
     // set heatmap to off
@@ -47,7 +47,7 @@ var renderHeatMap = function (aggregate) {
       .domain(maxMinArray)
       .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
-   var svg = d3.select("#city").selectAll("svg");
+   var svg = d3.select("#map").selectAll("svg");
 
       // Render the heat map
       svg.selectAll("path")
