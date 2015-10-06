@@ -61,18 +61,7 @@ var renderPoints = function (data, callback) {
     coord = [d.X, d.Y];
     return projection(coord)[1]; 
   })
-
-  // .attr("r", "3px")
-  // .attr("r", "0px")
-  // .transition()
-  // .ease("cubic-in-out")
   .attr("r", "3px")
-  // .transition()
-  // .delay(1500)
-  // .ease("cubic-in-out")
-  // .style("fill", "#eeeeee")
-  // .attr("r", "0px");
-
   .on("mouseover", function(d) {
       // render tooltip when hovering over a crime 
       tooltip.transition()    
@@ -91,16 +80,14 @@ var renderPoints = function (data, callback) {
       svg.selectAll('circle')
       .attr("r", "3px");
   });
-
   callback();
 };
 
+// this function is currently not used
 var animatePoints = function(svg) {
   // set all the crime dots to invisible
   svg.selectAll("circle")
-  // .attr("r", "0px")
   // they will take 500 ms to appear
-
   .transition(500)
   // but this will be delayed by the hour and minute of the crime in the database 
   .delay(function(d) {
@@ -110,7 +97,6 @@ var animatePoints = function(svg) {
   // make it look nice
   .ease("cubic-in-out")
   .attr("r", "2px")
-
   // make it fade out again
   .transition()
   // every dot will be visible for 1000 ms, hence the last number in the delay function
@@ -120,7 +106,6 @@ var animatePoints = function(svg) {
   })
   .ease("cubic-in-out")
   .attr("r", "0px");
-
 };
 
 var render = function () {
