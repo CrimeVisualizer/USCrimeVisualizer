@@ -7,7 +7,8 @@ var playbackSpeed = 50;
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
-
+var monthData;
+ 
 var storeData = function (data) {
   dataStorage = {};
   for (var i = 0; i < data.length; i++) {
@@ -18,7 +19,8 @@ var storeData = function (data) {
       dataStorage[dtg] = [data[i]];
     }
   }
-  return data;
+  monthData = data;
+  // return data;
 }
 
 var getData = function (callback, params) {

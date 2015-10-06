@@ -8,12 +8,8 @@ var makeCategories = function (data) {
 
   });
   var categories = [];
-  console.log(data)
   data.forEach(function (d) {
     categories.push([d._id.Category, d.count]);
-    // d.category = d._id.Category;
-    // categories[d.category] = d.count;
-    // d.date = d._id.Date;
   });
   $(".categories").empty();
 
@@ -22,8 +18,9 @@ var makeCategories = function (data) {
     $(".categories").append("<dd class=\"category\">" + value[0] + " " + value[1] + "</dd>");
   });
   // on hover display only those crimes within that category
+    var svg = d3.select("#city").selectAll("svg");
   $(".category").mouseenter(function () {
-    var category = $(this).text();
+    var category = $(this).text().split(" ")[0];
     svg.selectAll("circle")
     .each(function(d) {
       if(d.Category !== category) {
