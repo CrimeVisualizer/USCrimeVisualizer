@@ -22,6 +22,24 @@
 
 > Some usage instructions
 
+#Greetings from Bowen and Tim
+
+##Start up server
+1. Open a terminal window
+2. npm install 
+3. bower install 
+4. Run 'mongod' (start mongo db on your system)
+5. Run 'grunt' in a new tab (run nodemon on server/bin/www)
+6. Run 'grunt import' in a new tab (import test.csv into mongodb)
+7. Run 'grunt summarize' (makes summary tables)
+
+(6 and 7 should only be needed once)
+
+##If nodemon crashes your app
+1. Cry
+2. Call mom
+3. Run 'grunt'
+
 
 ## Requirements
 
