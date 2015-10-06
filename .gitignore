@@ -6,12 +6,11 @@ iisnode.yml
 
 node_modules
 client/bower_components
+jqueryclient/bower_components
+server/data/fulldata.csv
 
 # Icon must ends with two \r.
 Icon
-
-
-
 
 # Floobits
 .floo
