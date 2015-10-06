@@ -1,3 +1,23 @@
+var heatmap = false;
+
+// the callback should set play to the opposite of what it was and relaunch tick function
+d3.selectAll("#heatmap").on("click", function () {
+  if(heatmap) {
+    console.log('turning off')
+    // toggle heatmap off
+    var svg = d3.select("#city").selectAll("svg");
+    svg.selectAll("path")
+          .attr("class", 'qOff')
+    // set heatmap to off
+    heatmap = false;
+  } else { // Toggles heatmap on
+    console.log('turning on')
+    renderHeatMap(dataSet);
+    heatmap = true;
+  }
+});
+
+
 // Calculates min and max of crime data set for use in quantize
 var getMaxMin = function (data) {
   var resultArray = [];
@@ -13,19 +33,32 @@ var getMaxMin = function (data) {
   return resultArray;
 };
 
+// Renders Heat Map - this is rendered in place of standard map
+var renderHeatMap = function (aggregate) {
+  var maxMinArray = getMaxMin(aggregate);
 
-// Sum each zipcode count by each record
-var getZipcodeCount = function (data) {
-  return _.countBy(data, function(record) {
-    return record['zipcode'];
-  });
+  // Generates a range of 9 values within the provided domain.
+  // Function used to generated CSS class values, 0-8.
+  // Values correspond to a range of blues in CSS file (see CSS file)
+
+  // render();
+
+  var quantize = d3.scale.quantize()
+      .domain(maxMinArray)
+      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+   var svg = d3.select("#city").selectAll("svg");
+
+      // Render the heat map
+      svg.selectAll("path")
+          .attr("class", function(d) {
+            return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
+          });
 };
 
-// Renders Heat Map - this is rendered in place of standard map
-var renderHeatMap = function () {
-
-  // Import data
-  var aggregate = { '94102': 288,
+// Import data
+  var dataSet = { 
+  '94102': 288,
   '94103': 491,
   '94104': 22,
   '94105': 65,
@@ -51,21 +84,12 @@ var renderHeatMap = function () {
   '94134': 71 
   }
 
-    var maxMinArray = getMaxMin(aggregate);
+// renderHeatMap(dataSet);
 
-  // Generates a range of 9 values within the provided domain.
-  // Function used to generated CSS class values, 0-8.
-  // Values correspond to a range of blues in CSS file (see CSS file)
-  var quantize = d3.scale.quantize()
-      .domain(maxMinArray)
-      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
-        
-      // Render the heat map
-      svg.selectAll("path")
-          .attr("class", function(d) {
-            console.log(d.id, quantize(aggregate[d.id]));
-            return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
-          });
+
+// Sum each zipcode count by each record
+var getZipcodeCount = function (data) {
+  return _.countBy(data, function(record) {
+    return record['zipcode'];
+  });
 };
-
-renderHeatMap();
