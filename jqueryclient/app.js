@@ -7,7 +7,8 @@ var playbackSpeed = 50;
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
-
+var monthData;
+ 
 var storeData = function (data) {
   dataStorage = {};
   for (var i = 0; i < data.length; i++) {
@@ -18,7 +19,8 @@ var storeData = function (data) {
       dataStorage[dtg] = [data[i]];
     }
   }
-  return data;
+  monthData = data;
+  // return data;
 }
 
 var getData = function (callback, params) {
@@ -38,7 +40,7 @@ var renderPoints = function (data, callback) {
   // with different params 
   var coord;
   // add circles to svg
-  var svg = d3.select("#city").selectAll("svg");
+  var svg = d3.select("#map").selectAll("svg");
   // tooltip element is invisible by default
   var tooltip = d3.select("body").append("div") 
       .attr("class", "tooltip")       

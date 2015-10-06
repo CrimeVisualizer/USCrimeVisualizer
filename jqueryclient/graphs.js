@@ -1,6 +1,6 @@
 var graphs = function (data) {
   var margin = {top: 30, right: 100, bottom: 30, left: 60},
-  width = window.innerWidth - 100 - margin.left - margin.right,
+  width = window.innerWidth - 250 - margin.left - margin.right,
   // height = 270 - margin.top - margin.bottom;
   height = 180 - margin.top - margin.bottom;
 
@@ -88,7 +88,20 @@ var graphs = function (data) {
       d = x0 - d0 > d1 - x0 ? d1 : d0;
     focus.attr("transform", "translate(" + x(d.Date) + "," + y(d.count) + ")");
     focus.select("text").text( d.count + ' crimes committed in '+ parseFullDate(d.Date));
+    $.get('api/categories/date=' + parseDate(d.Date), function (data) {
+      console.log(parseDate(d.Date));
+      console.log(data);
+      makeCategories(JSON.parse(data));
+    });
   };
+
+
+  $("#showAll").on("click", function() {
+    renderPoints(monthData, function() {
+      // console.log('Hi legacy team!');
+    });
+  });
+
 
   var click = function () {
     var x0 = x.invert(d3.mouse(this)[0]),

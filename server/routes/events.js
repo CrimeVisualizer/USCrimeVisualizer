@@ -20,17 +20,11 @@ router.get('/date=:date', function (req, res, next) {
   var data = req.params.date.split('-');
   var year = +data[0];
   var month = +data[1];
-  var rollover = 0;
-  if(month > 10) {
-    rollover = 1;
-  }
-  var search = [
-    { Date: new RegExp('.*' + month + '\/.*\/' + year)}
-  ]
+  var search = { Date: new RegExp('.*' + month + '\/.*\/' + year)};
 
   connection(function (db) {
     // here we use search varable to correctly query db for 3 months
-    db.collection('allCrimes').find({$or: search}).toArray(function(err, results) {
+    db.collection('allCrimes').find(search).toArray(function(err, results) {
       res.send(JSON.stringify(results));
     });
   });

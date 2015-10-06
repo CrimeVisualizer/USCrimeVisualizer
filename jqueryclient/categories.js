@@ -1,20 +1,26 @@
 var makeCategories = function (data) {
+  data.sort(function(a,b) {
+    if (a._id.Category > b._id.Category) 
+      {return 1}
+    else {
+      return -1;
+    }
 
-  var categories = {};
-  data.forEach(function (d) {
-    d.category = d._id.Category;
-    categories[d.category] = d.category;
-    d.date = d._id.Date;
   });
-
+  var categories = [];
+  data.forEach(function (d) {
+    categories.push([d._id.Category, d.count]);
+  });
+  $(".categories").empty();
 
   // make buttons for every crime category
   _.each(categories, function (value) {
-    $("#categories").append("<dd class=\"category\">" + value + "</dd>");
+    $(".categories").append("<dd class=\"category\">" + value[0] + " " + value[1] + "</dd>");
   });
   // on hover display only those crimes within that category
+    var svg = d3.select("#map").selectAll("svg");
   $(".category").mouseenter(function () {
-    var category = $(this).text();
+    var category = $(this).text().split(" ")[0];
     svg.selectAll("circle")
     .each(function(d) {
       if(d.Category !== category) {
@@ -28,6 +34,3 @@ var makeCategories = function (data) {
     .attr("r", "1px");
   });
 };
-$.get('api/categories', function (data) {
-  makeCategories(JSON.parse(data));
-})

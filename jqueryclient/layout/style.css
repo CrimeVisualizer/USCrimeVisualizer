@@ -24,8 +24,8 @@ body, html {
 #graph {
   /*float: left;*/
   /*margin-left: -1%;*/
-  background-color: #181818;
-  width: 100%;
+  /*background-color: #181818;*/
+  /*width: 100%;*/
   /*padding: 10px 10px 10px 0px;*/
   text-align: center;
 }
@@ -164,6 +164,7 @@ path:hover {
 .q6-9{fill:rgb(33,113,181)}
 .q7-9{fill:rgb(8,81,156)}
 .q8-9{fill:rgb(8,48,107)}
+.qOff{fill: #101010}
 
 .brand-icon {
   margin-right: 10px;
@@ -271,7 +272,7 @@ div.tooltip {
 #graph>.axis path,
 #graph>.axis line {
   fill: none;
-  stroke: #000;
+  /*stroke: #000;*/
   shape-rendering: crispEdges;
 }
 
