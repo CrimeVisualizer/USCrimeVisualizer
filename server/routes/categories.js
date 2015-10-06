@@ -7,14 +7,15 @@ var fs = require('fs');
 router.get('/date=:date', function (req, res, next) {
   // query DB for everything
   // will return you all the events in the database
-  var data = req.params.date.split('-');
-  var year = +data[0];
-  var month = +data[1];
-  var search = { Date: new RegExp('.*' + month + '\/.*\/' + year)};
+  var data = req.params.date;
+  console.log(data);
+  // var year = +data[0];
+  // var month = +data[1];
+  // var search = { Date: new RegExp('.*' + month + '\/.*\/' + year)};
 
   connection(function (db) {
 
-    db.collection('summarized_categorymonth').find(search).toArray(function(err, results) {
+    db.collection('summarized_categorymonth').find({"_id.Date": data}).toArray(function(err, results) {
       res.send(JSON.stringify(results));
     });
   });

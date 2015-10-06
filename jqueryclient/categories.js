@@ -1,16 +1,25 @@
 var makeCategories = function (data) {
-  var categories = {};
+  data.sort(function(a,b) {
+    if (a._id.Category > b._id.Category) 
+      {return 1}
+    else {
+      return -1;
+    }
+
+  });
+  var categories = [];
   console.log(data)
   data.forEach(function (d) {
-    d.category = d._id.Category;
-    categories[d.category] = d.count;
-    d.date = d._id.Date;
+    categories.push([d._id.Category, d.count]);
+    // d.category = d._id.Category;
+    // categories[d.category] = d.count;
+    // d.date = d._id.Date;
   });
-
+  $(".categories").empty();
 
   // make buttons for every crime category
-  _.each(categories, function (value, key) {
-    $(".categories").append("<dd class=\"category\">" + key + " " + value + "</dd>");
+  _.each(categories, function (value) {
+    $(".categories").append("<dd class=\"category\">" + value[0] + " " + value[1] + "</dd>");
   });
   // on hover display only those crimes within that category
   $(".category").mouseenter(function () {
