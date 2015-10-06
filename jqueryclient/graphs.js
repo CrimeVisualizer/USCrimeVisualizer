@@ -94,6 +94,14 @@ var graphs = function (data) {
     });
   };
 
+
+  $("#showAll").on("click", function() {
+    renderPoints(monthData, function() {
+      // console.log('Hi legacy team!');
+    });
+  });
+
+
   var click = function () {
     var x0 = x.invert(d3.mouse(this)[0]),
       i = bisectDate(data, x0, 1),
