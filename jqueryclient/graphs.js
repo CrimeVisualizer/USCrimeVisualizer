@@ -1,7 +1,8 @@
 var graphs = function (data) {
   var margin = {top: 30, right: 100, bottom: 30, left: 60},
   width = window.innerWidth - 100 - margin.left - margin.right,
-  height = 270 - margin.top - margin.bottom;
+  // height = 270 - margin.top - margin.bottom;
+  height = 180 - margin.top - margin.bottom;
 
   // Parse the date / time
   var parseDate = d3.time.format("%Y-%m");

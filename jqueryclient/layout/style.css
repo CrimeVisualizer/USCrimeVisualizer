@@ -12,17 +12,24 @@ body, html {
 
 #map {
   color: white;
-  text-align: left;
+  text-align: center;
+
+  /*position: relative;*/
+  /*margin-left: 5%;*/
   /*margin-bottom: 150px;*/
-  margin-left: 10%;
+/*  margin-left: 0%;*/
 }
+
+
 #graph {
-  float: left;
-  background-color: white;
-  padding: 10px;
-  background-color: #101010;
+  /*float: left;*/
+  /*margin-left: -1%;*/
+  background-color: #181818;
+  width: 100%;
+  /*padding: 10px 10px 10px 0px;*/
   text-align: center;
 }
+
 #timeline button, 
 #categories button,
 #months button {
@@ -41,10 +48,12 @@ body, html {
 }
 
 
+
 #sidebar {
-  position: absolute;
+  /*position: absolute;*/
+  min-height: 1000px;
   height: 100%;
-  width: 250px;
+  /*width: 250px;*/
   padding-top: 30px;
   background-color: rgba(0, 0, 0, 0.19);
   /*height: 800px;*/
@@ -59,11 +68,14 @@ body, html {
   /*margin-bottom: 40px;
   margin-left: 30px;
   margin-top: 10%;*/
-
+  
   padding: 10px;
   border-radius: 2px;
 }
 
+#dataVis {
+
+}
 
 #neighborhood {
   margin-left: -20px;
@@ -106,7 +118,7 @@ body, html {
 }
 
 #d3Map {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   font-family: 'Fjalla One', sans-serif;
@@ -138,7 +150,6 @@ path:hover {
 }
 
 .navColor {
-
   background-color: rgba(30, 136, 229, 0.58);
   margin-bottom: 40px;
   z-index: 100;
@@ -167,10 +178,10 @@ path:hover {
 }
 
 #zoomButtons {
-  position: absolute;
+  /*position: absolute;*/
   /*text-align: right;*/
-  top: 2%;
-  right: 2%;
+  /*top: 2%;*/
+  /*right: 2%;*/
 }
 
 #zoomButtons button {
@@ -209,13 +220,17 @@ path:hover {
   left: 40%;
 }
 
-#play, #pause {
+#play, 
+#pause,
+#speedup {
   text-decoration: none;
   color: white;
 
 }
 
-#play:hover, #pause:hover {
+#play:hover, 
+#pause:hover,
+#speedup:hover {
   color: rgba(30, 136, 229, 0.85);
 }
 
