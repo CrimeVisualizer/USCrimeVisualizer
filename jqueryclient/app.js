@@ -3,7 +3,7 @@ var arr = [];
 var projection, now;
 // have a global variable for current time
 // that variable is set to where the clock is currently at
-var playbackSpeed = 50;
+var playbackSpeed = 800;
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
@@ -62,6 +62,10 @@ var renderPoints = function (data, callback) {
     return projection(coord)[1]; 
   })
 
+  // .attr("r", "3px")
+  // .attr("r", "0px")
+  // .transition()
+  // .ease("cubic-in-out")
   .attr("r", "3px")
   // .transition()
   // .delay(1500)
@@ -262,7 +266,11 @@ function tick (dtg) {
     }
   }
 }
-
+$("#speedup").on("click", function () {
+  if (playbackSpeed >= 50) {
+    playbackSpeed -= 200;
+  }
+})
 
 // getData(function (data) {
 //   // save results of data in window for fast lookup by date time group

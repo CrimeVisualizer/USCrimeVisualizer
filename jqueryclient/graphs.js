@@ -89,8 +89,8 @@ var graphs = function (data) {
     focus.attr("transform", "translate(" + x(d.Date) + "," + y(d.count) + ")");
     focus.select("text").text( d.count + ' crimes committed in '+ parseFullDate(d.Date));
     $.get('api/categories/date=' + parseDate(d.Date), function (data) {
-      console.log(parseDate(d.Date));
-      console.log(data);
+      // console.log(parseDate(d.Date));
+      // console.log(data);
       makeCategories(JSON.parse(data));
     });
   };
