@@ -9,6 +9,9 @@ body, html {
   min-height: 500px;
 }
 
+.category {
+  font-size: 20px;
+}
 
 #map {
   color: white;
@@ -20,6 +23,11 @@ body, html {
 /*  margin-left: 0%;*/
 }
 
+#clockboard, #clock {
+  margin-left: -50%;
+  /*padding-left: 40%;*/
+
+}
 
 #graph {
   /*float: left;*/
@@ -172,6 +180,7 @@ path:hover {
 
 .submit {
   background-color: rgba(30, 136, 229, 0.85);
+  margin: 5px 0;
 }
 
 .submit:hover {
@@ -253,6 +262,7 @@ button.active {
 }*/
 
 #district {
+  font-size: 20px;
   height: 45px;
 }
 

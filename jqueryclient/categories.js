@@ -31,6 +31,6 @@ var makeCategories = function (data) {
   // restore back to a map with all crimes on louse leave
   $(".category").mouseleave(function () {
     svg.selectAll("circle")
-    .attr("r", "1px");
+    .attr("r", "3px");
   });
 };
