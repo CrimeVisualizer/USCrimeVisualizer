@@ -1,5 +1,11 @@
-var heatmap = false;
+/*
+*
+* Generates the heatmap (aka 'Chrolopleth' http://bl.ocks.org/mbostock/4060606)
+* 
+*/
 
+
+var heatmap = false;
 // the callback should set play to the opposite of what it was and relaunch tick function
 d3.selectAll("#heatmap").on("click", function () {
   if(heatmap) {
@@ -41,22 +47,23 @@ var renderHeatMap = function (aggregate) {
   // Function used to generated CSS class values, 0-8.
   // Values correspond to a range of blues in CSS file (see CSS file)
 
-  // render();
-
   var quantize = d3.scale.quantize()
       .domain(maxMinArray)
       .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
+  // Selects the SVG to change attributes
    var svg = d3.select("#map").selectAll("svg");
 
-      // Render the heat map
+      // Render the heat map - this adds CSS to color the map
       svg.selectAll("path")
           .attr("class", function(d) {
             return quantize(aggregate[d.id]); // Quantize by total crimes per zipcode
           });
 };
 
-// Import data
+// Import data - This is hard coded data, generated from utilities/pointInPolygon.
+// The dataSet below is a summary of crimes in each zipcode over 7 days
+
   var dataSet = { 
   '94102': 288,
   '94103': 491,
@@ -83,9 +90,6 @@ var renderHeatMap = function (aggregate) {
   '94133': 139,
   '94134': 71 
   }
-
-// renderHeatMap(dataSet);
-
 
 // Sum each zipcode count by each record
 var getZipcodeCount = function (data) {
