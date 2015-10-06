@@ -1,16 +1,28 @@
+// dataStorage will hold the data for a month's worth of events
+// each key will be a date time group (e.g. Wed 09/03/2015, 03:05)
+// the value for a key will be an array with all crime events
+// this allows for the clock's tick function to have fast lookup of events
+// that match to the current time on the clock
 var dataStorage = {};
-var arr = [];
+
+// the variable now is the current data-time-group
+// which shows where the clock is currently at
 var projection, now;
-// have a global variable for current time
-// that variable is set to where the clock is currently at
+
+// we have a default playback speed for showing events
+// but it can be changed
 var playbackSpeed = 800;
+
 // another global variable play is set to false initially
 // when true, the animation will play
 var play = false;
+
+// monthData will hold the entire data after a month's worth of data
+// is fetched
 var monthData;
  
 var storeData = function (data) {
-  dataStorage = {};
+  dataStorage = {}; // clear out old data storage when this function is run
   for (var i = 0; i < data.length; i++) {
     var dtg = new Date(data[i].Date + ',' + data[i].Time);
     if (dataStorage[dtg]) {
@@ -27,12 +39,12 @@ var getData = function (callback, params) {
   /* Makes ajax call to database with 
      the needed params. eg the start date from where to fetch crimes
   */
-  console.log(params);
   $.get('/api/events/' + params , function (data) {
     callback(data);
   });
 };
 
+// renderPoints takes a callback to ensure that it isn't event blocking
 var renderPoints = function (data, callback) {
   // renders points of crime on the map created by render() function call 
   // this function gets called by an event in timeline.js
@@ -111,6 +123,8 @@ var animatePoints = function(svg) {
 var render = function () {
   // Renders the map (districts outline) into the city div. 
   var width = .9 * window.innerWidth, height = .9 * window.innerHeight;
+  
+  // allow for zooming functionality
   var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
   // Creates the map svg
   var svg = d3.select('#map').append("svg").attr("width", width).attr("height", height)
@@ -140,11 +154,15 @@ var render = function () {
     return d.properties.name;
   });
 
-  // displays the district name on top of the map on hover 
+  // displays the district name that you're hovering on on the map 
   $('svg path').hover(function() {
     $("#district").text($(this).data("name"));
   });
 
+  // functions that handle the zoom functionality
+  // there is probably a better way to separate these out
+  // the current implementation also does not have a zoom event
+  // work for the dots on the map
   function zoomed () {
       svg.attr("transform",
           "translate(" + zoom.translate() + ")" +
@@ -223,8 +241,9 @@ function tick (dtg) {
         hours = now.getHours(),
         minutes = now.getMinutes(),
         seconds = now.getSeconds();
-    console.log(now)
+    
 
+    // modifies the look of the clock as it increases
     digit = digit.data([hours / 10 | 0, hours % 10, minutes / 10 | 0, minutes % 10, seconds / 10 | 0, seconds % 10]);
     digit.select("path:nth-child(1)").classed("lit", function(d) { return digitPattern[0][d]; });
     digit.select("path:nth-child(2)").classed("lit", function(d) { return digitPattern[1][d]; });
@@ -235,12 +254,13 @@ function tick (dtg) {
     digit.select("path:nth-child(7)").classed("lit", function(d) { return digitPattern[6][d]; });
     separator.classed("lit", minutes);
 
+  // if play is pressed, then the clock will increase by one minute
   if (play) {
     // if current date matches an event, render that event on screen
     if (dataStorage[now]) {
       renderPoints(dataStorage[now], function () {
         setTimeout(function() {
-          tick(now.getTime() + 60000)
+          tick(now.getTime() + 60000) // adding 60000 ms increases clock time by one minute
         }, playbackSpeed); // animate the clock at speed of playbackSpeed
       });
 
@@ -251,28 +271,27 @@ function tick (dtg) {
     }
   }
 }
+
+// listener for increasing playback speed
 $("#speedup").on("click", function () {
+  // max playback speed is 50ms
   if (playbackSpeed >= 50) {
     playbackSpeed -= 200;
   }
 })
 
-// getData(function (data) {
-//   // save results of data in window for fast lookup by date time group
-//   data = JSON.parse(data);
-//   render();
-//   tick(day + currentTime);
-// });
 
 // play button will also have an on click event
 // the callback should set play to the opposite of what it was and relaunch tick function
 d3.selectAll("#play, #pause").on("click", function () {
   // switch from showing play or pause button
   $("#play").toggle();
-  $("#pause").toggle();
+  $("#pause").toggle(); // pause is initially set to display: none in the css
   // if play is false, pressing play will set it to true, and vice versa
   play = !play;
+  // call the tick function to turn on the clock
   tick(now);
 });
 
+// render the map on screen when the app loads
 render();
